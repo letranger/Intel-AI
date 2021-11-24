@@ -1,0 +1,1352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-24 Wed 10:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>課程規劃</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Yung Chin, Yen" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">課程規劃</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org0eb7b0d">1. Job</a></li>
+<li><a href="#org724ffdb">2. AI4Y南區講師分配</a></li>
+<li><a href="#org636d25d">3. 課程內容</a></li>
+<li><a href="#org2921f2c">4. Inspire</a></li>
+<li><a href="#orgb3d4f7a">5. Acquire</a></li>
+<li><a href="#orgc5f5a93">6. Experience</a></li>
+<li><a href="#org7fc0290">7. Empower</a></li>
+<li><a href="#orgb7529d6">8. Schedual</a></li>
+<li><a href="#org2e55b9e">9. Skills Outcome Map</a></li>
+<li><a href="#org9abc477">10. Install openvino for 403 Macmini</a></li>
+</ul>
+</div>
+</div>
+<p>
+The Learning Journey: Express Vision: 4-stage learning journey to equip youths with the mindsets and skillsets for AI-readiness.<br />
+</p>
+<div id="outline-container-org0eb7b0d" class="outline-2">
+<h2 id="org0eb7b0d"><span class="section-number-2">1</span> Job</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>列出英特爾所有學習目標與時間，然後分區一起討論目標删減。<br /></li>
+<li>11月27日三區要報告excel討論成果及柏翰老師教案分享（表格另寄）.<br /></li>
+<li>請各區在11月25日下班前將討論好的excel檔寄到群組，謝謝<br /></li>
+</ul>
+</div>
+<div id="outline-container-org5ae7c5c" class="outline-3">
+<h3 id="org5ae7c5c"><span class="section-number-3">1.1</span> Question</h3>
+<div class="outline-text-3" id="text-1-1">
+<ol class="org-ol">
+<li>請問是我們要交的表是否是像下圖的第二個表?<br /></li>
+<li>在計劃中預訂的課表，每個主題是100分鐘，我們有需要詳列每個目標要花多少時間嗎?還是只列出目標即可?<br /></li>
+<li>L1~L3的實作是營隊自行新增的主題，不在原Intel教學內容中，事先也未討論過其教學內容為何，請問這部份要如何撰寫?<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org97826b2" class="outline-3">
+<h3 id="org97826b2"><span class="section-number-3">1.2</span> 公告</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+抱歉打擾，由於講師群組成員尚未完全入群，有關課程的事項仍重複在此公告一次<br />
+</p>
+<ol class="org-ol">
+<li>目前課程分配如下圖，有任何問題請反應<br /></li>
+<li><p>
+各位講師好，在27日開會前，我們尚有幾項工作要完成:<br />
+Andrew Yang, Aggle Chen兩位老師，由於您二位選擇的主題剛好是此次南區分配到的任務主題，所以要請兩位老師完成以下工作:<br />
+</p>
+<ol class="org-ol">
+<li>撰寫南區負責主題(M1, M2, M3, L1)的教學中文目標，這部份我先寫了草稿翻譯，檔案內容如下圖，請兩位老師看一下內容是否合適，如有需要請自行修改後存檔，該檔案的連結為:<br />
+<a href="https://docs.google.com/spreadsheets/d/1KqRN3kFSrEynNsHpRNkoRVUOwkg_xtHn7pzeR8-lMzQ/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1KqRN3kFSrEynNsHpRNkoRVUOwkg_xtHn7pzeR8-lMzQ/edit?usp=sharing</a><br /></li>
+<li>另外，還要請兩位老師協助列出編刪意見，將M1, M2, M3, L1的教學目標與教學內容刪減到適合在100分鐘內完成，請將刪減建議貼到群組上，這部份我們在27日要上台報告，麻煩兩位老師了。<br /></li>
+</ol>
+<p>
+最後，也請負責其他講師研究您所負責的主題，在27日開會時提出討論。<br />
+</p>
+<ol class="org-ol">
+<li></li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org724ffdb" class="outline-2">
+<h2 id="org724ffdb"><span class="section-number-2">2</span> AI4Y南區講師分配</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+主題分配原則: 上午/下午/晚<br />
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">負責老師</th>
+<th scope="col" class="org-left">南區負責主題</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A.</td>
+<td class="org-left">Day1</td>
+<td class="org-left">M1(簡介), M2(統計數據)</td>
+<td class="org-left">Andrew Yang</td>
+<td class="org-left">M1, M2</td>
+</tr>
+
+<tr>
+<td class="org-left">B.</td>
+<td class="org-left">Day1</td>
+<td class="org-left">M3(自然語言), L1(實作)</td>
+<td class="org-left">Aggle Chen</td>
+<td class="org-left">M3, L1</td>
+</tr>
+
+<tr>
+<td class="org-left">C.</td>
+<td class="org-left">Day1</td>
+<td class="org-left">L1(實作)</td>
+<td class="org-left">Andrew Yang</td>
+<td class="org-left">L1</td>
+</tr>
+
+<tr>
+<td class="org-left">D.</td>
+<td class="org-left">Day2</td>
+<td class="org-left">M4(計算機視覺), M5(數據採集)</td>
+<td class="org-left">chi chin lee</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">E.</td>
+<td class="org-left">Day2</td>
+<td class="org-left">M6(影像處理), L2(實作)</td>
+<td class="org-left">chi chin lee</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">F.</td>
+<td class="org-left">Day2</td>
+<td class="org-left">L2(實作)</td>
+<td class="org-left">Aggie Chen</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">G.</td>
+<td class="org-left">Day3</td>
+<td class="org-left">M7(影像標記), M8(模型建立), L3(實作)</td>
+<td class="org-left">趙小銘</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">H.</td>
+<td class="org-left">Day3</td>
+<td class="org-left">M9(評估), L3(實作)</td>
+<td class="org-left">趙小銘</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">I.</td>
+<td class="org-left">Day3</td>
+<td class="org-left">L3(實作)</td>
+<td class="org-left">何錫霖</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">J.</td>
+<td class="org-left">Day4</td>
+<td class="org-left">M10(OpenVino)</td>
+<td class="org-left">lala</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">K.</td>
+<td class="org-left">Day4</td>
+<td class="org-left">M11(範例集練習-講座), M11(範例集練習-實作)</td>
+<td class="org-left">顏永進</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">L.</td>
+<td class="org-left">Day4</td>
+<td class="org-left">L3(實作)</td>
+<td class="org-left">何錫霖</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">M.</td>
+<td class="org-left">Day5</td>
+<td class="org-left">發表1, 發表2</td>
+<td class="org-left">lala</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org636d25d" class="outline-2">
+<h2 id="org636d25d"><span class="section-number-2">3</span> 課程內容</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgd374643" class="outline-3">
+<h3 id="orgd374643"><span class="section-number-3">3.1</span> Module 1: Overview</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org9d6ada7" class="outline-4">
+<h4 id="org9d6ada7"><span class="section-number-4">3.1.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-1-1">
+</div>
+<div id="outline-container-org7c2bf8e" class="outline-5">
+<h5 id="org7c2bf8e"><span class="section-number-5">3.1.1.1</span> PPTX</h5>
+<div class="outline-text-5" id="text-3-1-1-1">
+<ul class="org-ul">
+<li>[Slides] Module 1.pptx (49 slides)<br /></li>
+<li>AI game clue.pptx (6 slides_)<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6f9a597" class="outline-5">
+<h5 id="org6f9a597"><span class="section-number-5">3.1.1.2</span> DOCX</h5>
+<div class="outline-text-5" id="text-3-1-1-2">
+<ul class="org-ul">
+<li>Research Template.docx<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org29b56f4" class="outline-4">
+<h4 id="org29b56f4"><span class="section-number-4">3.1.2</span> 時間</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ul class="org-ul">
+<li>100分鐘: 08:00 - 10:10<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcc9bb5a" class="outline-4">
+<h4 id="orgcc9bb5a"><span class="section-number-4">3.1.3</span> 主要活動 240 MINUTES</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<ol class="org-ol">
+<li>The AI Game + relection: 40 mins<br /></li>
+<li>Kimchi Introduction<br /></li>
+<li>System Mapping + Loop實作: 15 mins<br /></li>
+<li>Project Vegita: Project Vegita<br /></li>
+<li>Create a Future Job Ad: 50 mins, (Ideally the research should not take more than 20 minutes. However youth can be given some extra time provided the same is adjusted for in the presentation session. The total time to be taken for both the parts of the activity should not exceed 40 mins)<br /></li>
+<li>Game of Ethics: 30 mins<br /></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org195025c" class="outline-3">
+<h3 id="org195025c"><span class="section-number-3">3.2</span> Module 2: Statistical Data</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-org2301085" class="outline-4">
+<h4 id="org2301085"><span class="section-number-4">3.2.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-2-1">
+</div>
+<div id="outline-container-org1cce9dc" class="outline-5">
+<h5 id="org1cce9dc"><span class="section-number-5">3.2.1.1</span> PPTX</h5>
+<div class="outline-text-5" id="text-3-2-1-1">
+<ul class="org-ul">
+<li>[Slides] Module 2.pptx (100 slides)<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org357181d" class="outline-5">
+<h5 id="org357181d"><span class="section-number-5">3.2.1.2</span> DOCX</h5>
+<div class="outline-text-5" id="text-3-2-1-2">
+<ul class="org-ul">
+<li>Problem Scoping Template.pptx<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6234dfd" class="outline-4">
+<h4 id="org6234dfd"><span class="section-number-4">3.2.2</span> 時間</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<ul class="org-ul">
+<li>100 mins: 10:20-12:00<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge9fbaf0" class="outline-4">
+<h4 id="orge9fbaf0"><span class="section-number-4">3.2.3</span> 主要活動 120 MINUTES</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<ol class="org-ol">
+<li>AI Introduction<br /></li>
+<li>AI Project Cycle Case: Demo with Project Vegita<br />
+<ul class="org-ul">
+<li>Introduction to Problem Scoping and the 4Ws framework<br /></li>
+<li>Data Acquisition<br /></li>
+<li>Data Exploration<br /></li>
+<li>Modelling<br /></li>
+<li>Evaluation<br /></li>
+<li>Reflection<br /></li>
+</ul></li>
+<li>Problem Statement Template<br />
+<ul class="org-ul">
+<li>Problem Scoping Template.pptx<br /></li>
+</ul></li>
+<li>Data Acquisition<br /></li>
+<li>Data Exploration<br /></li>
+<li>Modeling<br /></li>
+<li>Introduction Neural Networks: 60 mins<br /></li>
+<li>Model Evaluation<br />
+<ul class="org-ul">
+<li><a href="https://highscope.ch.ntu.edu.tw/wordpress/?p=80752">AI的表現好嗎？十種常見的評估指標</a><br /></li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd14377a" class="outline-3">
+<h3 id="orgd14377a"><span class="section-number-3">3.3</span> Module 3: NLP</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org2cbff6e" class="outline-4">
+<h4 id="org2cbff6e"><span class="section-number-4">3.3.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<ul class="org-ul">
+<li>[Slides] Module 3.pptx (65 slides)<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4fd6889" class="outline-4">
+<h4 id="org4fd6889"><span class="section-number-4">3.3.2</span> 時間</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<ul class="org-ul">
+<li>100 mins<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgde9f662" class="outline-4">
+<h4 id="orgde9f662"><span class="section-number-4">3.3.3</span> 主要活動 120 MINUTES</h4>
+<div class="outline-text-4" id="text-3-3-3">
+<ul class="org-ul">
+<li>Human v.s. Computer Language<br /></li>
+<li>Data Processing<br /></li>
+<li>[Optional Activity] Use the worksheet given!<br />
+使用:[Worksheet] Text Processing Activity.docx<br /></li>
+<li>Bag or Words<br /></li>
+<li>Understanding Vectors<br /></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10262664">[自然語言處理基礎] 文本預處理(II)：正規化，就是一視同仁 </a><br /></li>
+<li><a href="https://leemeng.tw/shortest-path-to-the-nlp-world-a-gentle-guide-of-natural-language-processing-and-deep-learning-for-everyone.html">LeeMeng - 進入 NLP 世界的最佳橋樑：寫給所有人的自然語言處理與深度學習入門指南</a><br /></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10214221">Day 7: 親手寫個檢索系統吧（ㄧ）文件預處理 </a><br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9ddb70b" class="outline-4">
+<h4 id="org9ddb70b"><span class="section-number-4">3.3.4</span> DEMO</h4>
+<div class="outline-text-4" id="text-3-3-4">
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">coding: utf-8</span>
+<span class="linenr"> 2: </span><span style="color: #51afef;">import</span> sys
+<span class="linenr"> 3: </span><span style="color: #51afef;">import</span> json
+<span class="linenr"> 4: </span><span style="color: #51afef;">from</span> gensim.models <span style="color: #51afef;">import</span> doc2vec
+<span class="linenr"> 5: </span><span style="color: #51afef;">from</span> collections <span style="color: #51afef;">import</span> namedtuple
+<span class="linenr"> 6: </span>
+<span class="linenr"> 7: </span>
+<span class="linenr"> 8: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Load data</span>
+<span class="linenr"> 9: </span><span style="color: #dcaeea;">raw_doc</span> = [<span style="color: #98be65;">"I love machine learning. Its awesome."</span>,
+<span class="linenr">10: </span>        <span style="color: #98be65;">"I love coding in python"</span>,
+<span class="linenr">11: </span>        <span style="color: #98be65;">"I love building chatbots"</span>,
+<span class="linenr">12: </span>        <span style="color: #98be65;">"they chat amagingly well"</span>]
+<span class="linenr">13: </span>
+<span class="linenr">14: </span>
+<span class="linenr">15: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Preprocess</span>
+<span class="linenr">16: </span><span style="color: #dcaeea;">docs</span> = []
+<span class="linenr">17: </span><span style="color: #dcaeea;">analyzedDocument</span> = namedtuple(<span style="color: #98be65;">'AnalyzedDocument'</span>, <span style="color: #98be65;">'words tags'</span>)
+<span class="linenr">18: </span><span style="color: #51afef;">for</span> index, text <span style="color: #51afef;">in</span> <span style="color: #c678dd;">enumerate</span>(raw_doc):
+<span class="linenr">19: </span>    <span style="color: #dcaeea;">words</span> = text.split()
+<span class="linenr">20: </span>    docs.append(analyzedDocument(words, [index]))
+<span class="linenr">21: </span>
+<span class="linenr">22: </span>
+<span class="linenr">23: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Train</span>
+<span class="linenr">24: </span><span style="color: #dcaeea;">model</span> = doc2vec.Doc2Vec(docs, vector_size=<span style="color: #da8548; font-weight: bold;">20</span>, window=<span style="color: #da8548; font-weight: bold;">300</span>, min_count=<span style="color: #da8548; font-weight: bold;">1</span>, workers=<span style="color: #da8548; font-weight: bold;">4</span>, dm=<span style="color: #da8548; font-weight: bold;">1</span>)
+<span class="linenr">25: </span>
+<span class="linenr">26: </span>
+<span class="linenr">27: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Save</span>
+<span class="linenr">28: </span>model.save(<span style="color: #98be65;">'doc2vec.model'</span>)
+<span class="linenr">29: </span>
+<span class="linenr">30: </span>
+<span class="linenr">31: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">Load</span>
+<span class="linenr">32: </span>model = doc2vec.Doc2Vec.load(<span style="color: #98be65;">'doc2vec.model'</span>)
+<span class="linenr">33: </span><span style="color: #c678dd;">print</span>(model.docvecs[<span style="color: #da8548; font-weight: bold;">1</span>].shape)
+<span class="linenr">34: </span><span style="color: #c678dd;">print</span>(model.docvecs[<span style="color: #da8548; font-weight: bold;">1</span>])
+</pre>
+</div>
+
+<pre class="example">
+(20,)
+[-0.01887621  0.01302744 -0.02849153  0.0131293   0.02904045 -0.04056058
+ -0.04169167 -0.04981408  0.02464924 -0.04563693  0.02922578  0.0340294
+ -0.03257207 -0.02262998 -0.00628912  0.00822178 -0.00741135 -0.04270934
+ -0.01805406  0.00866313]
+</pre>
+</div>
+</div>
+<div id="outline-container-orgc74434d" class="outline-4">
+<h4 id="orgc74434d"><span class="section-number-4">3.3.5</span> jeiba DEMO</h4>
+<div class="outline-text-4" id="text-3-3-5">
+<ul class="org-ul">
+<li><a href="https://leemeng.tw/shortest-path-to-the-nlp-world-a-gentle-guide-of-natural-language-processing-and-deep-learning-for-everyone.html">https://leemeng.tw/shortest-path-to-the-nlp-world-a-gentle-guide-of-natural-language-processing-and-deep-learning-for-everyone.html</a><br /></li>
+<li><a href="https://medium.com/ml-note/word-embedding-3ca60663999d">Word Embedding 編碼矩陣</a><br /></li>
+<li><a href="https://medium.com/@mishra.thedeepak/doc2vec-simple-implementation-example-df2afbbfbad5">DOC2VEC gensim tutorial</a><br /></li>
+<li><a href="https://www.twblogs.net/a/5db38150bd9eee310ee69608">Doc2Vec模型的介紹與gensim中Doc2Vec的使用</a><br /></li>
+<li><a href="https://clay-atlas.com/blog/2020/07/14/python-cn-nlp-gensim-doc2vec-model/">如何訓練 Doc2Vec 模型</a><br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="linenr"> 1: </span><span style="color: #51afef;">import</span> jieba.posseg <span style="color: #51afef;">as</span> pseg
+<span class="linenr"> 2: </span>
+<span class="linenr"> 3: </span><span style="color: #dcaeea;">text</span> = <span style="color: #98be65;">'&#25105;&#26159;&#29579;&#23567;&#26126;&#65292;&#22312;&#21488;&#21335;&#35712;&#26360;&#30340;&#23416;&#29983;&#65292;&#25105;&#21916;&#27489;&#21917;&#21654;&#21857;&#12289;&#19981;&#21916;&#27489;&#35712;&#26360;'</span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">words</span> = pseg.cut(text)
+<span class="linenr"> 5: </span><span style="color: #dcaeea;">wordList</span> = []
+<span class="linenr"> 6: </span><span style="color: #51afef;">for</span> w, f <span style="color: #51afef;">in</span> <span style="color: #dcaeea;">words</span>:
+<span class="linenr"> 7: </span>    wordList.append(w)
+<span class="linenr"> 8: </span>    <span style="color: #c678dd;">print</span>(w, f)
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span><span style="color: #c678dd;">print</span>(wordList)
+<span class="linenr">11: </span>word_index = {
+<span class="linenr">12: </span>    word: idx
+<span class="linenr">13: </span>    <span style="color: #51afef;">for</span> idx, word <span style="color: #51afef;">in</span> <span style="color: #c678dd;">enumerate</span>(wordList)
+<span class="linenr">14: </span>}
+<span class="linenr">15: </span><span style="color: #c678dd;">print</span>(word_index)
+<span class="linenr">16: </span><span style="color: #c678dd;">print</span>(wordList)
+<span class="linenr">17: </span><span style="color: #c678dd;">print</span>([word_index[w] <span style="color: #51afef;">for</span> w <span style="color: #51afef;">in</span> wordList])
+</pre>
+</div>
+
+<pre class="example">
+我 r
+是 v
+王小明 nr
+， x
+在 p
+台南 ns
+讀書 n
+的 uj
+學生 n
+， x
+我 r
+喜歡 v
+喝咖啡 nr
+、 x
+不 d
+喜歡 v
+讀書 n
+['我', '是', '王小明', '，', '在', '台南', '讀書', '的', '學生', '，', '我', '喜歡', '喝咖啡', '、', '不', '喜歡', '讀書']
+{'我': 10, '是': 1, '王小明': 2, '，': 9, '在': 4, '台南': 5, '讀書': 16, '的': 7, '學生': 8, '喜歡': 15, '喝咖啡': 12, '、': 13, '不': 14}
+['我', '是', '王小明', '，', '在', '台南', '讀書', '的', '學生', '，', '我', '喜歡', '喝咖啡', '、', '不', '喜歡', '讀書']
+[10, 1, 2, 9, 4, 5, 16, 7, 8, 9, 10, 15, 12, 13, 14, 15, 16]
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org554247a" class="outline-3">
+<h3 id="org554247a"><span class="section-number-3">3.4</span> Module 4: Computer Vision</h3>
+<div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-org2c43c5d" class="outline-4">
+<h4 id="org2c43c5d"><span class="section-number-4">3.4.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<ul class="org-ul">
+<li>[Facilitator] Module 4.docx (37 slides)<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfca1fa4" class="outline-4">
+<h4 id="orgfca1fa4"><span class="section-number-4">3.4.2</span> 主要活動 60 MINUTES</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<ol class="org-ol">
+<li>Introduction to Computer Vision<br /></li>
+<li>How do computers see images?<br /></li>
+<li>Convolution operator<br /></li>
+<li>Models for solving CV problems<br /></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org57801ec" class="outline-4">
+<h4 id="org57801ec"><span class="section-number-4">3.4.3</span> 參考資源</h4>
+<div class="outline-text-4" id="text-3-4-3">
+</div>
+<div id="outline-container-orgf40494c" class="outline-5">
+<h5 id="orgf40494c"><span class="section-number-5">3.4.3.1</span> NLP</h5>
+<div class="outline-text-5" id="text-3-4-3-1">
+<ul class="org-ul">
+<li><a href="https://easyai.tech/ai-definition/stemming-lemmatisation/">詞干提取 – Stemming | 詞形還原 – Lemmatisation</a><br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge4f6e3b" class="outline-5">
+<h5 id="orge4f6e3b"><span class="section-number-5">3.4.3.2</span> NLP ads Videos</h5>
+<div class="outline-text-5" id="text-3-4-3-2">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=H53JSXPXPxI">Grammarly</a><br /></li>
+<li><a href="https://www.youtube.com/watch?v=L2vpOL-jHpQ">Kite</a><br /></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgafec580" class="outline-3">
+<h3 id="orgafec580"><span class="section-number-3">3.5</span> Module 5: Data Acquisition</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<div id="outline-container-orga476d46" class="outline-4">
+<h4 id="orga476d46"><span class="section-number-4">3.5.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<ul class="org-ul">
+<li>[Slides] Module 5.pptx (29 slides)<br /></li>
+<li>[Work Files - Coach] Module 5.rar<br /></li>
+<li>[Work Files - Youth] Module 5.rar<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdf70f70" class="outline-4">
+<h4 id="orgdf70f70"><span class="section-number-4">3.5.2</span> 主要活動 270 MINUTES</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<ul class="org-ul">
+<li>Introduction to Python<br /></li>
+<li>利用python從網路下載dataset?<br /></li>
+<li>Self-directed Learning: Learn how to obtain and process data using Python and the pandas library<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orged9914b" class="outline-3">
+<h3 id="orged9914b"><span class="section-number-3">3.6</span> Module 6: Data Exploration</h3>
+<div class="outline-text-3" id="text-3-6">
+</div>
+<div id="outline-container-orge93e93e" class="outline-4">
+<h4 id="orge93e93e"><span class="section-number-4">3.6.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-6-1">
+<ul class="org-ul">
+<li>[Slides] Module 6.pptx (23 slides)<br /></li>
+<li>[Work Files - Youth] Module 6.zip<br /></li>
+<li>[Work Files - Coach] Module 6.rar<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf871ebd" class="outline-4">
+<h4 id="orgf871ebd"><span class="section-number-4">3.6.2</span> 主要活動 300 MINUTES</h4>
+<div class="outline-text-4" id="text-3-6-2">
+<ul class="org-ul">
+<li>Exploring and Visualizing Data<br /></li>
+<li>Notebook: Basic Data Processing and Visualization<br /></li>
+<li>Notebook: Handling Erroneous and Missing Data<br /></li>
+<li>Notebook: Data visualization and processing for Fashion MNIST<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org41c10e1" class="outline-3">
+<h3 id="org41c10e1"><span class="section-number-3">3.7</span> Module 7: Data Exploration (Image Labeling)</h3>
+<div class="outline-text-3" id="text-3-7">
+</div>
+<div id="outline-container-org98db8d9" class="outline-4">
+<h4 id="org98db8d9"><span class="section-number-4">3.7.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-7-1">
+<ul class="org-ul">
+<li>[Slides] Module 7.pptx (10 slides)<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5c2d259" class="outline-4">
+<h4 id="org5c2d259"><span class="section-number-4">3.7.2</span> 主要活動 90 MINUTES</h4>
+<div class="outline-text-4" id="text-3-7-2">
+<ul class="org-ul">
+<li>Types of AI models<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org738813e" class="outline-3">
+<h3 id="org738813e"><span class="section-number-3">3.8</span> Module 8: Modeling</h3>
+<div class="outline-text-3" id="text-3-8">
+</div>
+<div id="outline-container-orgf195119" class="outline-4">
+<h4 id="orgf195119"><span class="section-number-4">3.8.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-8-1">
+<ul class="org-ul">
+<li>[Slides] Module 8.pptx (56 slides)<br /></li>
+<li>[Work Files - Youth] Module 8.rar<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge1b2a59" class="outline-4">
+<h4 id="orge1b2a59"><span class="section-number-4">3.8.2</span> 主要活動 480 MINUTES</h4>
+<div class="outline-text-4" id="text-3-8-2">
+<ul class="org-ul">
+<li>CNN<br /></li>
+<li>feature map<br /></li>
+<li>Pooling Layer<br /></li>
+<li>SVM<br /></li>
+<li>Notebook: Introduction to OpenCV library using Jupyter Notebook<br /></li>
+<li>CNNs for the Fashion MNIST dataset<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org34008ba" class="outline-3">
+<h3 id="org34008ba"><span class="section-number-3">3.9</span> Module 9: Evaluation</h3>
+<div class="outline-text-3" id="text-3-9">
+</div>
+<div id="outline-container-org27426ed" class="outline-4">
+<h4 id="org27426ed"><span class="section-number-4">3.9.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-9-1">
+<ul class="org-ul">
+<li>[Slides] Module 9.pptx (17 slides)<br /></li>
+<li>[Work Files - Youth] Module 9.rar<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2869f54" class="outline-4">
+<h4 id="org2869f54"><span class="section-number-4">3.9.2</span> 主要活動 120 MINUTES</h4>
+<div class="outline-text-4" id="text-3-9-2">
+<ul class="org-ul">
+<li>Notebook: Model Evaluation for Fashion MNIST<br /></li>
+<li>Introduction<br /></li>
+<li>Recap: Evaluation methods<br /></li>
+<li>Self-directed learning: Model Evaluation for Fashion MNIST<br /></li>
+<li>Recap<br /></li>
+<li>quiz<br /></li>
+<li>Reflection<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0831820" class="outline-3">
+<h3 id="org0831820"><span class="section-number-3">3.10</span> Module 10: OpenVINO™</h3>
+<div class="outline-text-3" id="text-3-10">
+</div>
+<div id="outline-container-orge636fec" class="outline-4">
+<h4 id="orge636fec"><span class="section-number-4">3.10.1</span> 教材</h4>
+<div class="outline-text-4" id="text-3-10-1">
+<ol class="org-ol">
+<li>[Slides] Module 10<br /></li>
+<li>[Work Files - Youth] Module 10<br /></li>
+<li>[Work Files - Coach] Module 10<br /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgcb145fc" class="outline-4">
+<h4 id="orgcb145fc"><span class="section-number-4">3.10.2</span> 主要活動 120 MINUTES</h4>
+<div class="outline-text-4" id="text-3-10-2">
+<ol class="org-ol">
+<li>Introduction<br /></li>
+<li>Introduction to OpenVINO™ using jupyter notebooks<br /></li>
+<li>Reflection<br /></li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgda4c7ba" class="outline-3">
+<h3 id="orgda4c7ba"><span class="section-number-3">3.11</span> 申請強制險</h3>
+<div class="outline-text-3" id="text-3-11">
+<ul class="org-ul">
+<li>申請書<br /></li>
+<li>印章<br /></li>
+<li>行照<br /></li>
+<li>駕照<br /></li>
+<li>診斷證明書<br /></li>
+<li>醫療單據<br /></li>
+<li>郵局存摺影本<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2921f2c" class="outline-2">
+<h2 id="org2921f2c"><span class="section-number-2">4</span> Inspire</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Get excited with the possiblities of AI and discuss pertient issue aroundAI (e.g. ethics, bias etc.)<br />
+</p>
+</div>
+<div id="outline-container-org32559f5" class="outline-3">
+<h3 id="org32559f5"><span class="section-number-3">4.1</span> Contents (4 hours)</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-org700a58d" class="outline-4">
+<h4 id="org700a58d"><span class="section-number-4">4.1.1</span> Overview(1)</h4>
+</div>
+</div>
+<div id="outline-container-orgf214885" class="outline-3">
+<h3 id="orgf214885"><span class="section-number-3">4.2</span> Tech Skills</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+null<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgc999ff3" class="outline-3">
+<h3 id="orgc999ff3"><span class="section-number-3">4.3</span> Social Skills</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>Awareness fo AI ethics, inclusion, bias, privacy<br /></li>
+<li>Social Perceptiveness, Critical thinking, Problem solving<br /></li>
+<li>Teamwork: Leadership<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb3d4f7a" class="outline-2">
+<h2 id="orgb3d4f7a"><span class="section-number-2">5</span> Acquire</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Acquire basic concepts in AI and be introduced to the three domains of AI - Statistical Data, Natural Language Processing and Computer Vision.<br />
+</p>
+</div>
+<div id="outline-container-org8f16d10" class="outline-3">
+<h3 id="org8f16d10"><span class="section-number-3">5.1</span> Contents (5 hours)</h3>
+<div class="outline-text-3" id="text-5-1">
+</div>
+<div id="outline-container-orge673596" class="outline-4">
+<h4 id="orge673596"><span class="section-number-4">5.1.1</span> AI domain-specific concepts</h4>
+<div class="outline-text-4" id="text-5-1-1">
+</div>
+<div id="outline-container-orge5f3ca9" class="outline-5">
+<h5 id="orge5f3ca9"><span class="section-number-5">5.1.1.1</span> Statistical Data (SD)(2)</h5>
+</div>
+<div id="outline-container-org96122ca" class="outline-5">
+<h5 id="org96122ca"><span class="section-number-5">5.1.1.2</span> Computer Vision (CV)(3)</h5>
+</div>
+<div id="outline-container-orgf88a7d2" class="outline-5">
+<h5 id="orgf88a7d2"><span class="section-number-5">5.1.1.3</span> Natural Langauge (NLP)(4)</h5>
+</div>
+</div>
+</div>
+<div id="outline-container-org36ef090" class="outline-3">
+<h3 id="org36ef090"><span class="section-number-3">5.2</span> Tech Skills</h3>
+<div class="outline-text-3" id="text-5-2">
+</div>
+<div id="outline-container-org9d09df1" class="outline-4">
+<h4 id="org9d09df1"><span class="section-number-4">5.2.1</span> Fundamental Skills</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<ul class="org-ul">
+<li>Data Science Project Flow<br /></li>
+<li>Applications fo Machien Learning<br /></li>
+<li>NLP Real-World Applications<br /></li>
+<li>NLP Fundamentals<br /></li>
+<li>CV Real-World Applications<br /></li>
+<li>CV Fundamentals<br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org82f937f" class="outline-3">
+<h3 id="org82f937f"><span class="section-number-3">5.3</span> Social Skills</h3>
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li>Awareness fo AI ethics, inclusion, bias, privacy<br /></li>
+<li>Social Perceptiveness, Critical thinking, Problem solving<br /></li>
+<li>Teamwork: Leadership<br /></li>
+<li>Communication: Sharing tech in plain and simple language<br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5f5a93" class="outline-2">
+<h2 id="orgc5f5a93"><span class="section-number-2">6</span> Experience</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Delve deeper into Computer Vision through hands-on activities. Complete the Fashion MNIST challenge and develop skills in data collection, model trainiing and code modification.<br />
+</p>
+</div>
+<div id="outline-container-org7a931ae" class="outline-3">
+<h3 id="org7a931ae"><span class="section-number-3">6.1</span> Contents (23 hours)</h3>
+<div class="outline-text-3" id="text-6-1">
+</div>
+<div id="outline-container-org056895d" class="outline-4">
+<h4 id="org056895d"><span class="section-number-4">6.1.1</span> Worked Example</h4>
+<div class="outline-text-4" id="text-6-1-1">
+</div>
+<div id="outline-container-org9dea9ba" class="outline-5">
+<h5 id="org9dea9ba"><span class="section-number-5">6.1.1.1</span> Data Acquisition(5.)</h5>
+</div>
+<div id="outline-container-orgba402b7" class="outline-5">
+<h5 id="orgba402b7"><span class="section-number-5">6.1.1.2</span> Data Exploration (Pre-proccessing Images)(6.)</h5>
+</div>
+<div id="outline-container-org6b0780d" class="outline-5">
+<h5 id="org6b0780d"><span class="section-number-5">6.1.1.3</span> Data Exploration (Image Labeling)(7.)</h5>
+</div>
+<div id="outline-container-org4c91dbb" class="outline-5">
+<h5 id="org4c91dbb"><span class="section-number-5">6.1.1.4</span> Modeling(8.)</h5>
+</div>
+<div id="outline-container-org16cc311" class="outline-5">
+<h5 id="org16cc311"><span class="section-number-5">6.1.1.5</span> Evaluation(9.)</h5>
+</div>
+</div>
+<div id="outline-container-org0137d76" class="outline-4">
+<h4 id="org0137d76"><span class="section-number-4">6.1.2</span> Face Detection</h4>
+<div class="outline-text-4" id="text-6-1-2">
+</div>
+<div id="outline-container-org01cefd2" class="outline-5">
+<h5 id="org01cefd2"><span class="section-number-5">6.1.2.1</span> OpenVINO(10)</h5>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb279737" class="outline-3">
+<h3 id="orgb279737"><span class="section-number-3">6.2</span> Tech Skills</h3>
+<div class="outline-text-3" id="text-6-2">
+</div>
+<div id="outline-container-org0ab4ea8" class="outline-4">
+<h4 id="org0ab4ea8"><span class="section-number-4">6.2.1</span> Fundamental Skills</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<ul class="org-ul">
+<li>Data Science Project Flow<br /></li>
+<li>Applications fo Machien Learning<br /></li>
+<li>NLP Real-World Applications<br /></li>
+<li>NLP Fundamentals<br /></li>
+<li>CV Real-World Applications<br /></li>
+<li>CV Fundamentals<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7859277" class="outline-4">
+<h4 id="org7859277"><span class="section-number-4">6.2.2</span> Project-Based Skills</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<ul class="org-ul">
+<li>Data Acquisition<br /></li>
+<li>Pre-processing Image<br /></li>
+<li>Image Labeling<br /></li>
+<li>Modeling<br /></li>
+<li>Evaluation<br /></li>
+<li>OpenVINO<sup>TM</sup><br /></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1db82b8" class="outline-3">
+<h3 id="org1db82b8"><span class="section-number-3">6.3</span> Social Skills</h3>
+<div class="outline-text-3" id="text-6-3">
+</div>
+<div id="outline-container-org52afa77" class="outline-4">
+<h4 id="org52afa77"><span class="section-number-4">6.3.1</span> Awareness fo AI ethics, inclusion, bias, privacy</h4>
+</div>
+<div id="outline-container-orged4ca6b" class="outline-4">
+<h4 id="orged4ca6b"><span class="section-number-4">6.3.2</span> Social Perceptiveness, Critical thinking, Problem solving</h4>
+</div>
+<div id="outline-container-orge6e6eed" class="outline-4">
+<h4 id="orge6e6eed"><span class="section-number-4">6.3.3</span> Teamwork</h4>
+<div class="outline-text-4" id="text-6-3-3">
+<ul class="org-ul">
+<li>Leadership<br /></li>
+<li>Organisational skill<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2c933c3" class="outline-4">
+<h4 id="org2c933c3"><span class="section-number-4">6.3.4</span> Communication</h4>
+<div class="outline-text-4" id="text-6-3-4">
+<p>
+Sharing tech in plain and simple language<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7fc0290" class="outline-2">
+<h2 id="org7fc0290"><span class="section-number-2">7</span> Empower</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Create social impact projects with the skills learnt and influence others to be AI-ready.<br />
+</p>
+</div>
+<div id="outline-container-orgebbadf9" class="outline-3">
+<h3 id="orgebbadf9"><span class="section-number-3">7.1</span> Contents (24 hours)</h3>
+<div class="outline-text-3" id="text-7-1">
+</div>
+<div id="outline-container-org2c7039d" class="outline-4">
+<h4 id="org2c7039d"><span class="section-number-4">7.1.1</span> (11)</h4>
+<div class="outline-text-4" id="text-7-1-1">
+</div>
+<div id="outline-container-org9a408bc" class="outline-5">
+<h5 id="org9a408bc"><span class="section-number-5">7.1.1.1</span> Intorduction to Use Cases</h5>
+<div class="outline-text-5" id="text-7-1-1-1">
+<ol class="org-ol">
+<li>AI Medical Exam<br /></li>
+<li>AI Security Support System<br /></li>
+<li>Car Detection from Traffic Data<br /></li>
+<li>Emotion Recognition<br /></li>
+<li>Energy Saving System in Classroom<br /></li>
+<li>AI Security System for Blind<br /></li>
+<li>Smoke and Fire Detection<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgf392b4c" class="outline-5">
+<h5 id="orgf392b4c"><span class="section-number-5">7.1.1.2</span> Brainstorming Solutions</h5>
+</div>
+<div id="outline-container-org92cf976" class="outline-5">
+<h5 id="org92cf976"><span class="section-number-5">7.1.1.3</span> Prototyping Solutions</h5>
+</div>
+<div id="outline-container-orgb23f092" class="outline-5">
+<h5 id="orgb23f092"><span class="section-number-5">7.1.1.4</span> Solution Presentation</h5>
+</div>
+<div id="outline-container-orgfe37d6c" class="outline-5">
+<h5 id="orgfe37d6c"><span class="section-number-5">7.1.1.5</span> Deploying AI solutions</h5>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfbe5386" class="outline-3">
+<h3 id="orgfbe5386"><span class="section-number-3">7.2</span> Tech Skills</h3>
+</div>
+<div id="outline-container-orga8b745e" class="outline-3">
+<h3 id="orga8b745e"><span class="section-number-3">7.3</span> Social Skills</h3>
+</div>
+</div>
+
+<div id="outline-container-orgb7529d6" class="outline-2">
+<h2 id="orgb7529d6"><span class="section-number-2">8</span> Schedual</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org1ce313c" class="outline-3">
+<h3 id="org1ce313c"><span class="section-number-3">8.1</span> Stage 1: Inspire</h3>
+<div class="outline-text-3" id="text-8-1">
+</div>
+<div id="outline-container-org8369f09" class="outline-4">
+<h4 id="org8369f09"><span class="section-number-4">8.1.1</span> Module 1 (240): Overview</h4>
+<div class="outline-text-4" id="text-8-1-1">
+</div>
+<div id="outline-container-orgbfdeba5" class="outline-5">
+<h5 id="orgbfdeba5"><span class="section-number-5">8.1.1.1</span> Class</h5>
+<div class="outline-text-5" id="text-8-1-1-1">
+<p>
+Day1, Class 1, Class 2<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfc40612" class="outline-3">
+<h3 id="orgfc40612"><span class="section-number-3">8.2</span> Stage 2: Acquire</h3>
+<div class="outline-text-3" id="text-8-2">
+</div>
+<div id="outline-container-orgdb85a2e" class="outline-4">
+<h4 id="orgdb85a2e"><span class="section-number-4">8.2.1</span> Module 2 (120): Statistical Data</h4>
+<div class="outline-text-4" id="text-8-2-1">
+</div>
+<div id="outline-container-org4fdb730" class="outline-5">
+<h5 id="org4fdb730"><span class="section-number-5">8.2.1.1</span> Class</h5>
+<div class="outline-text-5" id="text-8-2-1-1">
+<p>
+Day 1<br />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4cf2678" class="outline-4">
+<h4 id="org4cf2678"><span class="section-number-4">8.2.2</span> Module 3 (120): Natural Language Processing</h4>
+</div>
+<div id="outline-container-org1201914" class="outline-4">
+<h4 id="org1201914"><span class="section-number-4">8.2.3</span> Module 4 (60): Computer Vision</h4>
+</div>
+</div>
+<div id="outline-container-org9d4e5a6" class="outline-3">
+<h3 id="org9d4e5a6"><span class="section-number-3">8.3</span> Stage 3: Experience</h3>
+<div class="outline-text-3" id="text-8-3">
+</div>
+<div id="outline-container-org63b346d" class="outline-4">
+<h4 id="org63b346d"><span class="section-number-4">8.3.1</span> Module 5 (270): Data Acquisition</h4>
+</div>
+<div id="outline-container-orgf3e53e7" class="outline-4">
+<h4 id="orgf3e53e7"><span class="section-number-4">8.3.2</span> Module 6 (300): Data Exploration (Preprocessing Images)</h4>
+</div>
+<div id="outline-container-org196506b" class="outline-4">
+<h4 id="org196506b"><span class="section-number-4">8.3.3</span> Module 7 (90): Data Exploration (Image Labeling)</h4>
+</div>
+<div id="outline-container-org0d40abf" class="outline-4">
+<h4 id="org0d40abf"><span class="section-number-4">8.3.4</span> Module 8 (480): Modeling</h4>
+</div>
+<div id="outline-container-orga3f8ac7" class="outline-4">
+<h4 id="orga3f8ac7"><span class="section-number-4">8.3.5</span> Module 9 (120): Evaluation</h4>
+</div>
+<div id="outline-container-org804f5ec" class="outline-4">
+<h4 id="org804f5ec"><span class="section-number-4">8.3.6</span> Module 10 (120): OpenVINO™</h4>
+</div>
+</div>
+<div id="outline-container-orgdc8e525" class="outline-3">
+<h3 id="orgdc8e525"><span class="section-number-3">8.4</span> Stage 4: Empower</h3>
+<div class="outline-text-3" id="text-8-4">
+</div>
+<div id="outline-container-org5cd382e" class="outline-4">
+<h4 id="org5cd382e"><span class="section-number-4">8.4.1</span> Module 11 (24h)– Empower (Social Impact Project Creation)</h4>
+</div>
+</div>
+<div id="outline-container-orgd413294" class="outline-3">
+<h3 id="orgd413294"><span class="section-number-3">8.5</span> 課表</h3>
+<div class="outline-text-3" id="text-8-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Class</th>
+<th scope="col" class="org-left">Day 1</th>
+<th scope="col" class="org-left">Day 2</th>
+<th scope="col" class="org-left">Day 3</th>
+<th scope="col" class="org-left">Day 4</th>
+<th scope="col" class="org-left">Day 5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">08:30-10:10</td>
+<td class="org-left">Module 1</td>
+<td class="org-left">Module 4</td>
+<td class="org-left">Module 7</td>
+<td class="org-left">Module 9</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">10:20-12:00</td>
+<td class="org-left">Module 2</td>
+<td class="org-left">Module 5</td>
+<td class="org-left">Module 8</td>
+<td class="org-left">Module 10</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">13:30-15:10</td>
+<td class="org-left">Module 2</td>
+<td class="org-left">Module 5</td>
+<td class="org-left">Module 8</td>
+<td class="org-left">Module 11</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">15:20-17:00</td>
+<td class="org-left">Module 3</td>
+<td class="org-left">Module 6</td>
+<td class="org-left">Module 8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">18:30-20:10</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Module 6</td>
+<td class="org-left">Module 8</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2e55b9e" class="outline-2">
+<h2 id="org2e55b9e"><span class="section-number-2">9</span> Skills Outcome Map</h2>
+<div class="outline-text-2" id="text-9">
+
+<div id="orgb8b037e" class="figure">
+<p><img src="images/2021-10-17_17-49-47.png" alt="2021-10-17_17-49-47.png" width="600" /><br />
+</p>
+<p><span class="figure-number">Figure 1: </span>Skills Outcome Map</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9abc477" class="outline-2">
+<h2 id="org9abc477"><span class="section-number-2">10</span> Install openvino for 403 Macmini</h2>
+<div class="outline-text-2" id="text-10">
+<ol class="org-ol">
+<li>copy CMake to /Application<br /></li>
+<li></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung Chin, Yen</p>
+<p class="date">Created: 2021-11-24 Wed 10:41</p>
+</div>
+</body>
+</html>

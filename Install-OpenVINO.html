@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 21:05 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Install Open Vino on MacOS</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Yung Chin, Yen" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Install Open Vino on MacOS</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org51e1f69">1. Uninstallation OpenVino on Mac</a></li>
+<li><a href="#org84eb947">2. Installation step by step</a></li>
+<li><a href="#org99af86d">3. Intall OpenVino by Docker</a>
+<ul>
+<li><a href="#orgd2f3838">3.1. Introduction</a></li>
+<li><a href="#org3ab5307">3.2. Install Docker</a></li>
+<li><a href="#org86c7337">3.3. Testing Docker</a></li>
+<li><a href="#orgf8d9704">3.4. 使用 Docker 安裝 OpenVINO</a>
+<ul>
+<li><a href="#orgc4d653a">3.4.1. 下載、執行image</a></li>
+</ul>
+</li>
+<li><a href="#org9812415">3.5. Docker常用指令</a></li>
+<li><a href="#org4214242">3.6. 利用公開模型 MobileNet 執行圖像分類</a></li>
+<li><a href="#org39f6386">3.7. mobilenet 圖像分類</a>
+<ul>
+<li><a href="#org634e076">3.7.1. 下載openvion docker image</a></li>
+<li><a href="#org03f8e60">3.7.2. 下載模型</a></li>
+<li><a href="#org365bca3">3.7.3. 優化模型</a></li>
+<li><a href="#org75d02ee">3.7.4. 輸入圖片，測試推理</a></li>
+<li><a href="#orgae2b733">3.7.5. 換成其他汽車圖片</a></li>
+</ul>
+</li>
+<li><a href="#org6f21c65">3.8. Docker References</a></li>
+</ul>
+</li>
+<li><a href="#org845165b">4. Install openvino notebooks</a>
+<ul>
+<li><a href="#org6a3e2fa">4.1. conda基本語法</a>
+<ul>
+<li><a href="#org2350b2c">4.1.1. 檢查目前環境</a></li>
+<li><a href="#orgea7ef88">4.1.2. 建立新環境</a></li>
+<li><a href="#org69c38fc">4.1.3. 啟動虛擬環境</a></li>
+<li><a href="#org7fa3390">4.1.4. 刪除虛擬環境</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org4ff876e">5. Software</a>
+<ul>
+<li><a href="#org69ca4de">5.1. CMake 3.13 or higher</a></li>
+<li><a href="#org3bb1f09">5.2. Python 3.6 - 3.7</a></li>
+<li><a href="#orgb21bdf9">5.3. Apple Xcode* Command Line Tools</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org51e1f69" class="outline-2">
+<h2 id="org51e1f69"><span class="section-number-2">1</span> Uninstallation OpenVino on Mac</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>執行openvino_toolkit_uninstaller.app: /opt/intel/openvino_2021<br /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org84eb947" class="outline-2">
+<h2 id="org84eb947"><span class="section-number-2">2</span> Installation step by step</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>Install cmake<br />
+<ul class="org-ul">
+<li>東西在 NAS<br /></li>
+</ul></li>
+<li><p>
+Add /Applications/CMake.app/Contents/bin to path (for default install)<br />
+edit .bashrc file,加入<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">PATH</span>=<span style="color: #98be65;">"/Applications/CMake.app/Contents/bin:</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">PATH</span><span style="color: #98be65;">"</span>
+</pre>
+</div></li>
+<li>Install openvino tool kit<br />
+<ul class="org-ul">
+<li>NAS<br /></li>
+</ul></li>
+<li><p>
+vi ~/.bash_profile<br />
+加入<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">source</span> /opt/intel/openvino_2021/bin/setupvars.sh
+</pre>
+</div></li>
+<li><p>
+Configure the Model Optimizer¶<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">cd</span> /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
+<span class="linenr">2: </span>   <span style="color: #ECBE7B;">sudo</span> ./install_prerequisites.sh
+</pre>
+</div></li>
+<li><p>
+Upgrade PyYAML<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">sudo</span> -H pip3 install --ignore-installed PyYAML
+</pre>
+</div></li>
+<li><p>
+Testing<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">cd</span> /opt/intel/openvino_2021/deployment_tools/demo
+<span class="linenr">2: </span>   sh demo_benchmark_app.sh
+<span class="linenr">3: </span>   sh demo_security_barrier_camera.sh
+<span class="linenr">4: </span>   sh demo_squeezenet_download_convert_run.sh
+</pre>
+</div>
+<ol class="org-ol">
+<li>Install cv2<br /></li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>pip3 install --user opencv-python
+</pre>
+</div>
+
+<pre class="example">
+Collecting opencv-python
+  Using cached https://files.pythonhosted.org/packages/8b/9f/879a48a4d4361d1784728be8543f5c8b2b681db500c9e6854f0654645c3d/opencv_python-4.5.4.58-cp37-cp37m-macosx_10_15_x86_64.whl
+Collecting numpy&gt;=1.14.5 (from opencv-python)
+  Using cached https://files.pythonhosted.org/packages/5d/e4/1178a2e82d1c9abd696496d4f0fc2d09e346b43101829e08eb3ee558fd5d/numpy-1.21.4-cp37-cp37m-macosx_10_9_x86_64.whl
+Installing collected packages: numpy, opencv-python
+Successfully installed numpy-1.21.4 opencv-python-4.5.4.58
+</pre></li>
+
+<li><p>
+copy openvino to site_package<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span><span style="color: #ECBE7B;">cd</span> /Users/letranger/opt/anaconda3/lib/python3.8/site-packages
+<span class="linenr">2: </span><span style="color: #ECBE7B;">cp</span> -r /opt/intel/openvino_2021.4.689/python/python3.8/openvino .
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org99af86d" class="outline-2">
+<h2 id="org99af86d"><span class="section-number-2">3</span> Intall OpenVino by Docker</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgd2f3838" class="outline-3">
+<h3 id="orgd2f3838"><span class="section-number-3">3.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>一般大家買來的電腦上大部份都是安裝微軟的Windows作業系統，如果遇到要開發Liunx相關應用程式時，可能有人會選擇安裝二個作業系統，在重新開機時選擇要執行那一種。雖然這種方式可完全掌控硬體資源（如CPU, GPU, HDD, RAM）及開發環境（相依套件、函式庫），但每次切換作業系統都要重新開機，實在太麻煩。<br /></li>
+<li>為解決這個問題，於是就有人提出在主作業系統(Host OS)上安裝一個虛擬機(Virtual Machine, VM)監視器(Hypervisor)，如VMWare, VirtualBox這類工具，方便安裝其它作業系統或者多種不同的開發環境，如Fig. 1左圖所示。雖然這樣很方便同時使用兩種以上作業環境，但硬體資源要和主系統共享且額外多了一些虛擬化轉換工作，所以執行效能較差，甚至有些硬體（如GPU）無法直接使用，導致部份應用程式無法運作。<br /></li>
+<li>很多在Linux環境下開發程式的人都知道，它的應用程式比較不像在Windows下一個執行檔(.exe)或搭配幾個動態函式庫(.dll)就能順利執行，各種開發工具及相依套件包常會有版本不相容問題。本來在Linux上也可以執行虛擬機(VM)來區隔不同開發環境，但效能實在太差，所以便有人開發出以一種類似大船載送貨櫃，貨櫃裝載各種不同大小、形狀貨物的執行環境，稱為Docker。<br /></li>
+<li>如圖<a href="#org41a9eca">1</a>所示，容器(Containers)就像貨櫃是用來裝載映像檔(Images)這樣的貨物，再由Docker引擎（大船承載）執行的概念。表面上看起來和VM沒什麼不同，但最大差別就是它很輕量，不透過虛擬化，直接驅動硬體資源，共用作業系統資源，所以啟用一個容器和映像檔僅須數秒和載入一個VM客作業系統核心要數分鐘差異頗大。以往Docker只能在Linux上運作，近年來已有支援Window及Mac OS的版本出現了。<br /></li>
+<li>一般Docker使用上極為方便，供應商僅需將欲提供的映像檔(Images)推上(Push) 公開映像檔倉儲(Repository / Docker Hub)，使用者再去拉下(Pull)想要的映像檔即可執行，如圖<a href="#org41a9eca">1</a>右圖所示。<br /></li>
+</ul>
+
+<div id="org41a9eca" class="figure">
+<p><img src="images/OpenVINO_Docker_1.jpg" alt="OpenVINO_Docker_1.jpg" width="500" /><br />
+</p>
+<p><span class="figure-number">Figure 1: </span>VM和Docker架構差異比較圖。(OmniXRI, Jan. 2021整理製作)</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3ab5307" class="outline-3">
+<h3 id="org3ab5307"><span class="section-number-3">3.2</span> Install Docker</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li><p>
+Install Docker on Mac<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   brew install --cask  --appdir=/Applications docker
+</pre>
+</div>
+
+<pre class="example">
+   ==&gt; Downloading https://desktop.docker.com/mac/main/amd64/70708/Docker.dmg
+   ==&gt; Installing Cask docker
+   ==&gt; Moving App 'Docker.app' to '/Applications/Docker.app'
+   ==&gt; Linking Binary 'docker-compose.bash-completion' to '/usr/local/etc/bash_completion.d/docker-compose'
+   ==&gt; Linking Binary 'docker.zsh-completion' to '/usr/local/share/zsh/site-functions/_docker'
+   ==&gt; Linking Binary 'docker.fish-completion' to '/usr/local/share/fish/vendor_completions.d/docker.fish'
+   ==&gt; Linking Binary 'docker-compose.fish-completion' to '/usr/local/share/fish/vendor_completions.d/docker-compose.fish'
+   ==&gt; Linking Binary 'docker-compose.zsh-completion' to '/usr/local/share/zsh/site-functions/_docker_compose'
+   ==&gt; Linking Binary 'docker.bash-completion' to '/usr/local/etc/bash_completion.d/docker'
+   🍺  docker was successfully installed!
+</pre></li>
+
+<li>Pull from Github<br /></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org86c7337" class="outline-3">
+<h3 id="org86c7337"><span class="section-number-3">3.3</span> Testing Docker</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker run hello-world
+</pre>
+</div>
+<p>
+由於第一次執行，本機端並沒hello-world這個映像檔，所以會自動到Docker Hub去找，並下載回來。如果成功會看到下面畫面。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-orgf8d9704" class="outline-3">
+<h3 id="orgf8d9704"><span class="section-number-3">3.4</span> 使用 Docker 安裝 OpenVINO</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>Intel OpenVINO 對應不同操作系統(Windows, Linux, macOS, RaspbianOS)提供很多種安裝方式。近年來隨著各種容器技術興起，也開始支持像 Docker 這類直接安裝映像方式，充份解決用戶不熟悉安裝步驟及滿足開發者需要不同版本或開發環境隔離需求。<br /></li>
+<li>Intel OpenVINO 目前在 Docker Hub 上提供了多個映像讓使用者下載(pull)，其中有兩組使用率較高，openvino/workbench 用戶不需編程，直接操作圖型化接口就可測試各種模型的效率，openvino/ubuntu18_dev 則提供一般 Ubuntu 18.04 (Linux) 開發環境。<br /></li>
+<li>首先執行下列指令將映像文件 openvino/ubuntu18_dev 從 Docker Hub 拉下（下載）至本機端。由於文件數量較多且較大（解壓縮後約 7.22GByte），所以根據網絡速度可能需要等待數分鐘到數十分鍾不等。<br /></li>
+</ul>
+</div>
+<div id="outline-container-orgc4d653a" class="outline-4">
+<h4 id="orgc4d653a"><span class="section-number-4">3.4.1</span> 下載、執行image</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker pull openvino/ubuntu18_dev
+</pre>
+</div>
+<p>
+若想啟動映像文件，根據不同硬件執行下列命令。<br />
+</p>
+<ul class="org-ul">
+<li>Intel CPU<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker run -it --rm openvino/ubuntu18_dev
+</pre>
+</div>
+<ul class="org-ul">
+<li>Intel GPU<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker run -it --rm --device /dev/dri openvino/ubuntu18_dev
+</pre>
+</div>
+<ul class="org-ul">
+<li>NCS2（單個 VPU）<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker run -it --rm --device-cgroup-rule=<span style="color: #98be65;">'c 189:* rmw'</span> -v /dev/bus/usb:/dev/bus/usb openvino/ubuntu18_dev
+</pre>
+</div>
+<ul class="org-ul">
+<li>HDDL（多個 VPU）<br /></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker run -it --rm --device=/dev/ion:/dev/ion -v /var/tmp:/var/tmp openvino/ubuntu18_dev
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9812415" class="outline-3">
+<h3 id="org9812415"><span class="section-number-3">3.5</span> Docker常用指令</h3>
+<div class="outline-text-3" id="text-3-5">
+<ul class="org-ul">
+<li><p>
+docker info<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker info
+</pre>
+</div>
+
+<pre class="example">
+  Client:
+   Context:    default
+   Debug Mode: false
+   Plugins:
+    buildx: Build with BuildKit (Docker Inc., v0.6.3)
+    compose: Docker Compose (Docker Inc., v2.1.1)
+    scan: Docker Scan (Docker Inc., 0.9.0)
+
+  Server:
+   Containers: 4
+    Running: 1
+    Paused: 0
+    Stopped: 3
+   Images: 3
+   Server Version: 20.10.10
+   Storage Driver: overlay2
+    Backing Filesystem: extfs
+    Supports d_type: true
+    Native Overlay Diff: true
+    userxattr: false
+   Logging Driver: json-file
+   Cgroup Driver: cgroupfs
+   Cgroup Version: 1
+   Plugins:
+    Volume: local
+    Network: bridge host ipvlan macvlan null overlay
+    Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+   Swarm: inactive
+   Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+   Default Runtime: runc
+   Init Binary: docker-init
+   containerd version: 5b46e404f6b9f661a205e28d59c982d3634148f8
+   runc version: v1.0.2-0-g52b36a2
+   init version: de40ad0
+   Security Options:
+    seccomp
+     Profile: default
+   Kernel Version: 5.10.47-linuxkit
+   Operating System: Docker Desktop
+   OSType: linux
+   Architecture: x86_64
+   CPUs: 6
+   Total Memory: 1.939GiB
+   Name: docker-desktop
+   ID: L33G:3G5F:HIHY:FWNH:25ZM:DU35:IH2S:K4AD:6VKJ:UL3Z:IBW4:ZZY7
+   Docker Root Dir: /var/lib/docker
+   Debug Mode: false
+   HTTP Proxy: http.docker.internal:3128
+   HTTPS Proxy: http.docker.internal:3128
+   Registry: https://index.docker.io/v1/
+   Labels:
+   Experimental: false
+   Insecure Registries:
+    127.0.0.0/8
+   Live Restore Enabled: false
+
+</pre></li>
+<li>docker pull xxxxx<br />
+從Docker Hub拉下（下載）映像檔 [映像檔名稱xxxxx]<br /></li>
+<li><p>
+docker images<br />
+檢查目前已下載之映像檔<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker images
+</pre>
+</div>
+
+<pre class="example">
+REPOSITORY               TAG       IMAGE ID       CREATED       SIZE
+openvino/ubuntu18_dev    latest    5909980b90ae   8 days ago    5.63GB
+docker/getting-started   latest    eb9194091564   9 days ago    28.5MB
+hello-world              latest    feb5d9fea6a5   8 weeks ago   13.3kB
+</pre></li>
+<li><p>
+docker ps<br />
+檢查目前正在執行的container<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker ps
+</pre>
+</div>
+
+<pre class="example">
+CONTAINER ID   IMAGE                   COMMAND       CREATED       STATUS       PORTS     NAMES
+29c22b186088   openvino/ubuntu18_dev   "/bin/bash"   9 hours ago   Up 9 hours             compassionate_heyrovsky
+</pre></li>
+<li><p>
+docker ps -a<br />
+查看所有的container<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker ps -a
+</pre>
+</div>
+
+<pre class="example">
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS                      PORTS     NAMES
+7ce134ba2f64   hello-world              "/hello"                 16 minutes ago   Exited (0) 16 minutes ago             lucid_sinoussi
+29c22b186088   openvino/ubuntu18_dev    "/bin/bash"              9 hours ago      Up 9 hours                            compassionate_heyrovsky
+43ae292225cb   docker/getting-started   "/docker-entrypoint.…"   24 hours ago     Created                               charming_hofstadter
+07b136cc7716   docker/getting-started   "/docker-entrypoint.…"   24 hours ago     Exited (0) 14 minutes ago             goofy_goldwasser
+</pre></li>
+<li><p>
+docker start [Container ID]<br />
+啟動docker container<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker start 07b136cc7716
+<span class="linenr">2: </span>  docker ps
+</pre>
+</div>
+
+<pre class="example">
+07b136cc7716
+CONTAINER ID   IMAGE                    COMMAND                  CREATED        STATUS          PORTS                NAMES
+29c22b186088   openvino/ubuntu18_dev    "/bin/bash"              9 hours ago    Up 9 hours                           compassionate_heyrovsky
+07b136cc7716   docker/getting-started   "/docker-entrypoint.…"   24 hours ago   Up 13 seconds   0.0.0.0:80-&gt;80/tcp   goofy_goldwasser
+</pre></li>
+<li><p>
+docker stop [Container ID]<br />
+停止執行Container<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker stop 07b136cc7716
+</pre>
+</div>
+
+<pre class="example">
+07b136cc7716
+</pre></li>
+<li><p>
+docker rm [Container DI]<br />
+刪除Container<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker <span style="color: #ECBE7B;">rm</span> 7ce134ba2f64
+<span class="linenr">2: </span>  docker ps -a
+</pre>
+</div>
+
+<pre class="example">
+7ce134ba2f64
+CONTAINER ID   IMAGE                    COMMAND                  CREATED        STATUS        PORTS     NAMES
+29c22b186088   openvino/ubuntu18_dev    "/bin/bash"              11 hours ago   Up 11 hours             compassionate_heyrovsky
+43ae292225cb   docker/getting-started   "/docker-entrypoint.…"   26 hours ago   Created                 charming_hofstadter
+</pre></li>
+<li>docker rmi [Image ID]<br />
+刪除 image, 刪除 image 前必需將透過該 image 所產生的 container 移除<br /></li>
+
+<li><p>
+docker container ls<br />
+List containers<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>  docker container <span style="color: #ECBE7B;">ls</span>
+</pre>
+</div>
+
+<pre class="example">
+CONTAINER ID   IMAGE                   COMMAND       CREATED       STATUS       PORTS     NAMES
+29c22b186088   openvino/ubuntu18_dev   "/bin/bash"   9 hours ago   Up 9 hours             compassionate_heyrovsky
+</pre></li>
+
+<li></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4214242" class="outline-3">
+<h3 id="org4214242"><span class="section-number-3">3.6</span> 利用公開模型 MobileNet 執行圖像分類</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+利用 Docker 安裝好OpenVINO 工作環境後就可以開始進行推理(Inference)工作了。OpenVINO 除了提供多種預訓練好的模型外[11]，另外也支持很多不同框架 (Caffe/Caffe2, PyTorch, TensorFlow, MXNet, ONNX 等)產生的公開模型[12]，也稱為「Open Model Zoo」，其中包含圖像分類、對象偵測、圖像分割、人臉識別、人體 姿態、深度估測、圖像填補、風格轉移、動作識別、圖像著色、聲音分類、語音 識別、圖像翻譯等公開模型。<br />
+</p>
+
+<p>
+使用這些模型前須先下載並執行優化，最後產生 OpenVINO 推理時所需的中間表示文件(Intermediate Representation, IR)，即模型描述文件(<b>.xml)及參數權重文件(</b>.bin)，存放在/opt/intel/openvino/public/模型名稱/FP16(或 FP32, INT8)路徑下。<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org39f6386" class="outline-3">
+<h3 id="org39f6386"><span class="section-number-3">3.7</span> mobilenet 圖像分類</h3>
+<div class="outline-text-3" id="text-3-7">
+</div>
+<div id="outline-container-org634e076" class="outline-4">
+<h4 id="org634e076"><span class="section-number-4">3.7.1</span> 下載openvion docker image</h4>
+<div class="outline-text-4" id="text-3-7-1">
+<p>
+啟動 Docker 並指定映像在 Intel CPU 上執行，以 root 身份執行，同時指令顯示器和系統共享，方便 OpenCV 執行imshow()能正常工作<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>docker run -itu root:root --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e <span style="color: #dcaeea;">DISPLAY</span>=$<span style="color: #dcaeea;">DISPLAY</span> openvino/ubuntu18_dev
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org03f8e60" class="outline-4">
+<h4 id="org03f8e60"><span class="section-number-4">3.7.2</span> 下載模型</h4>
+<div class="outline-text-4" id="text-3-7-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>python3 /opt/intel/openvino/deployment_tools/tools/model_downloader/downloader.py --name mobilenet-v1-1.0-224
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org365bca3" class="outline-4">
+<h4 id="org365bca3"><span class="section-number-4">3.7.3</span> 優化模型</h4>
+<div class="outline-text-4" id="text-3-7-3">
+<p>
+優化mobilenet-v1-1.0-224 並產出中間表示(*.xml, *.bin)文件，FP16/FP32 格式於 /opt/intel/openvino/deployment_tools/public/模型名稱路徑下<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>python3 /opt/intel/openvino/deployment_tools/tools/model_downloader/converter.py --name mobilenet-v1-1.0-224
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org75d02ee" class="outline-4">
+<h4 id="org75d02ee"><span class="section-number-4">3.7.4</span> 輸入圖片，測試推理</h4>
+<div class="outline-text-4" id="text-3-7-4">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>python3 /opt/intel/openvino/inference_engine/samples/python/classification_sample_async/classification_sample_async.py -m /opt/intel/openvino/public/mobilenet-v1-1.0-224/FP16/mobilenet-v1-1.0-224.xml -i /opt/intel/openvino/deployment_tools/demo/car.png --labels /opt/intel/openvino/deployment_tools/demo/squeezenet1.1.labels
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgae2b733" class="outline-4">
+<h4 id="orgae2b733"><span class="section-number-4">3.7.5</span> 換成其他汽車圖片</h4>
+<div class="outline-text-4" id="text-3-7-5">
+<ol class="org-ol">
+<li>切換到host下載圖片, ~/Downloads/pickup.jpg<br /></li>
+<li><p>
+查詢container ID<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   docker ps
+</pre>
+</div>
+<pre class="example">
+CONTAINER ID   IMAGE                    COMMAND                  CREATED        STATUS        PORTS                NAMES
+29c22b186088   openvino/ubuntu18_dev    "/bin/bash"              9 hours ago    Up 9 hours                         compassionate_heyrovsky
+07b136cc7716   docker/getting-started   "/docker-entrypoint.…"   23 hours ago   Up 23 hours   0.0.0.0:80-&gt;80/tcp   goofy_goldwasser
+</pre></li>
+<li><p>
+將下載的圖片複製到container中<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   docker <span style="color: #ECBE7B;">cp</span> ~/Downloads/pickup.jpg 29c22b186088:/opt/intel/openvino/deployment_tools/demo
+</pre>
+</div></li>
+<li>重新測試推理<br /></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f21c65" class="outline-3">
+<h3 id="org6f21c65"><span class="section-number-3">3.8</span> Docker References</h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+<a href="https://makerpro.cc/2021/01/use-docker-to-develop-the-environment-of-openvino/">- 如何利用Docker快速建置OpenVINO™ Toolkit開發環境</a><br />
+</p>
+<ul class="org-ul">
+<li><a href="https://philipzheng.gitbook.io/docker_practice/introduction/what">什麼是 Docker</a><br /></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org845165b" class="outline-2">
+<h2 id="org845165b"><span class="section-number-2">4</span> Install openvino notebooks</h2>
+<div class="outline-text-2" id="text-4">
+<ol class="org-ol">
+<li>參考:<a href="https://github.com/openvinotoolkit/openvino_notebooks"> openvinotoolkit / openvino_notebooks </a><br /></li>
+<li><p>
+Create and activate a Virtual Environment<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   conda create --name openvino_env
+<span class="linenr">2: </span>   conda activate openvino_env
+</pre>
+</div></li>
+<li><p>
+Clone the Repository<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">cd</span> ~/Desktop
+<span class="linenr">2: </span>   <span style="color: #ECBE7B;">git</span> clone https://github.com/openvinotoolkit/openvino_notebooks.git
+<span class="linenr">3: </span>   <span style="color: #ECBE7B;">cd</span> ~/Desktop/openvino_notebooks
+</pre>
+</div></li>
+<li><p>
+Install the Packages<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   python -m pip install --upgrade pip
+<span class="linenr">2: </span>   pip install -r requirements.txt
+</pre>
+</div>
+<p>
+結果: 安裝openvino-dev時失敗<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr"> 1: </span>   Collecting <span style="color: #dcaeea;">openvino</span>==2021.4.0
+<span class="linenr"> 2: </span>     Using cached openvino-2021.4.0-3839-cp39-cp39-macosx_10_15_x86_64.whl <span style="color: #51afef;">(</span><span style="color: #da8548; font-weight: bold;">25.8</span> MB<span style="color: #51afef;">)</span>
+<span class="linenr"> 3: </span>   ERROR: Cannot install openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span>==2021.4.0, openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span>==2021.4.1 and openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span>==2021.4.2 because these package versions have conflicting dependencies.
+<span class="linenr"> 4: </span>
+<span class="linenr"> 5: </span>   The conflict is caused by:
+<span class="linenr"> 6: </span>       openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span> 2021.4.2 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
+<span class="linenr"> 7: </span>       openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span> 2021.4.1 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
+<span class="linenr"> 8: </span>       openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span> 2021.4.0 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
+<span class="linenr"> 9: </span>
+<span class="linenr">10: </span>   To fix this you could try to:
+<span class="linenr">11: </span>   <span style="color: #da8548; font-weight: bold;">1.</span> loosen the range of package versions you<span style="color: #98be65;">'ve specified</span>
+<span class="linenr">12: </span><span style="color: #98be65;">   2. remove package versions to allow pip attempt to solve the dependency conflict</span>
+</pre>
+</div></li>
+<li>修正原本的requirements.txt<br />
+刪除第一行<br /></li>
+<li><p>
+Install Intel® Distribution of OpenVINO™ toolkit from Anaconda Cloud<br />
+<a href="https://docs.openvino.ai/2021.3/openvino_docs_install_guides_installing_openvino_conda.html">https://docs.openvino.ai/2021.3/openvino_docs_install_guides_installing_openvino_conda.html</a><br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   conda install openvino-ie4py -c intel
+</pre>
+</div></li>
+<li><p>
+Install the virtualenv Kernel in Jupyter<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   python -m ipykernel install --user --name openvino_env
+</pre>
+</div></li>
+<li><p>
+Launch the Notebooks!<br />
+To launch a single notebook, like the Monodepth notebook<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   jupyter notebook notebooks/201-vision-monodepth/201-vision-monodepth.ipynb
+</pre>
+</div>
+<p>
+To launch all notebooks in Jupyter Lab<br />
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>   jupyter lab notebooks
+</pre>
+</div>
+<p>
+In Jupyter Lab, select a notebook from the file browser using the left sidebar. Each notebook is located in a subdirectory within the notebooks directory.<br />
+</p></li>
+</ol>
+</div>
+
+<div id="outline-container-org6a3e2fa" class="outline-3">
+<h3 id="org6a3e2fa"><span class="section-number-3">4.1</span> conda基本語法</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-org2350b2c" class="outline-4">
+<h4 id="org2350b2c"><span class="section-number-4">4.1.1</span> 檢查目前環境</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>conda env list
+</pre>
+</div>
+
+<pre class="example">
+# conda environments:
+#
+base                  *  /Users/letranger/opt/anaconda3
+ai4y                     /Users/letranger/opt/anaconda3/envs/ai4y
+myEnv                    /Users/letranger/opt/anaconda3/envs/myEnv
+
+</pre>
+</div>
+</div>
+<div id="outline-container-orgea7ef88" class="outline-4">
+<h4 id="orgea7ef88"><span class="section-number-4">4.1.2</span> 建立新環境</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>conda create --name myEnv <span style="color: #dcaeea;">python</span>=<span style="color: #da8548; font-weight: bold;">3.7</span>
+</pre>
+</div>
+
+<pre class="example">
+WARNING: A conda environment already exists at '/Users/letranger/opt/anaconda3/envs/myEnv'
+Remove existing environment (y/[n])?
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org69c38fc" class="outline-4">
+<h4 id="org69c38fc"><span class="section-number-4">4.1.3</span> 啟動虛擬環境</h4>
+<div class="outline-text-4" id="text-4-1-3">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>activate myEnv
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7fa3390" class="outline-4">
+<h4 id="org7fa3390"><span class="section-number-4">4.1.4</span> 刪除虛擬環境</h4>
+<div class="outline-text-4" id="text-4-1-4">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr">1: </span>conda remove --name myEnv
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org4ff876e" class="outline-2">
+<h2 id="org4ff876e"><span class="section-number-2">5</span> Software</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org69ca4de" class="outline-3">
+<h3 id="org69ca4de"><span class="section-number-3">5.1</span> CMake 3.13 or higher</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li><a href="https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-3.21.0-macos-universal.dmg">Install (choose &ldquo;macOS 10.13 or</a> later&ldquo;)<br /></li>
+<li>Add /Applications/CMake.app/Contents/bin to path (for default install)<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3bb1f09" class="outline-3">
+<h3 id="org3bb1f09"><span class="section-number-3">5.2</span> Python 3.6 - 3.7</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>Install (choose 3.6.x or 3.7.x, not latest)<br /></li>
+<li>Add to path<br /></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb21bdf9" class="outline-3">
+<h3 id="orgb21bdf9"><span class="section-number-3">5.3</span> Apple Xcode* Command Line Tools</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+In the terminal, run xcode-select &#x2013;install from any directory<br />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Yung Chin, Yen</p>
+<p class="date">Created: 2021-11-22 Mon 21:05</p>
+</div>
+</body>
+</html>
