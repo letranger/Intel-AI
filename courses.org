@@ -5,25 +5,6 @@
 #+OPTIONS: toc:1
 #+include: ../purpleweb.org
 
-
-* Job
-- 列出英特爾所有學習目標與時間，然後分區一起討論目標删減。
-- 11月27日三區要報告excel討論成果及柏翰老師教案分享（表格另寄）.
-- 請各區在11月25日下班前將討論好的excel檔寄到群組，謝謝
-** Question
-1. 請問是我們要交的表是否是像下圖的第二個表?
-2. 在計劃中預訂的課表，每個主題是100分鐘，我們有需要詳列每個目標要花多少時間嗎?還是只列出目標即可?
-3. L1~L3的實作是營隊自行新增的主題，不在原Intel教學內容中，事先也未討論過其教學內容為何，請問這部份要如何撰寫?
-** 公告
-抱歉打擾，由於講師群組成員尚未完全入群，有關課程的事項仍重複在此公告一次
-1. 目前課程分配如下圖，有任何問題請反應
-2. 各位講師好，在27日開會前，我們尚有幾項工作要完成:
-   Andrew Yang, Aggle Chen兩位老師，由於您二位選擇的主題剛好是此次南區分配到的任務主題，所以要請兩位老師完成以下工作:
-   1. 撰寫南區負責主題(M1, M2, M3, L1)的教學中文目標，這部份我先寫了草稿翻譯，檔案內容如下圖，請兩位老師看一下內容是否合適，如有需要請自行修改後存檔，該檔案的連結為:
-      https://docs.google.com/spreadsheets/d/1KqRN3kFSrEynNsHpRNkoRVUOwkg_xtHn7pzeR8-lMzQ/edit?usp=sharing
-   2. 另外，還要請兩位老師協助列出編刪意見，將M1, M2, M3, L1的教學目標與教學內容刪減到適合在100分鐘內完成，請將刪減建議貼到群組上，這部份我們在27日要上台報告，麻煩兩位老師了。
-   最後，也請負責其他講師研究您所負責的主題，在27日開會時提出討論。
-   4. 
 * AI4Y南區講師分配
 主題分配原則: 上午/下午/晚
 |----+------+--------------------------------------------+--------------+--------------|
@@ -60,7 +41,7 @@
 | 南區種子教師 | 林洲丞 |         | 臺東縣關山鎮國立關山工商 |            |                             |
 |--------------+--------+---------+--------------------------+------------+-----------------------------|
 
-* 課程內容
+* 課程內容 :noexport:
 ** Module 1: Overview
 *** 教材
 **** PPTX
@@ -300,90 +281,79 @@ print([word_index[w] for w in wordList])
 2. Introduction to OpenVINO™ using jupyter notebooks
 3. Reflection
 
-** 申請強制險
-:PROPERTIES:
-:ID:       7f5a51e3-4f48-4255-9d54-ebb73d3bee0f
-:END:
-- 申請書
-- 印章
-- 行照
-- 駕照
-- 診斷證明書
-- 醫療單據
-- 郵局存摺影本
-  
-* Inspire
+* 課程架構 :noexport:
+** Inspire
 Get excited with the possiblities of AI and discuss pertient issue aroundAI (e.g. ethics, bias etc.)
-** Contents (4 hours)
-*** Overview(1)
-** Tech Skills
+*** Contents (4 hours)
+**** Overview(1)
+*** Tech Skills
 null
-** Social Skills
+*** Social Skills
 - Awareness fo AI ethics, inclusion, bias, privacy
 - Social Perceptiveness, Critical thinking, Problem solving
 - Teamwork: Leadership
   
-* Acquire
+** Acquire
 Acquire basic concepts in AI and be introduced to the three domains of AI - Statistical Data, Natural Language Processing and Computer Vision.
-** Contents (5 hours)
-*** AI domain-specific concepts
-**** Statistical Data (SD)(2)
-**** Computer Vision (CV)(3)
-**** Natural Langauge (NLP)(4)
-** Tech Skills
-*** Fundamental Skills
+*** Contents (5 hours)
+**** AI domain-specific concepts
+***** Statistical Data (SD)(2)
+***** Computer Vision (CV)(3)
+***** Natural Langauge (NLP)(4)
+*** Tech Skills
+**** Fundamental Skills
 - Data Science Project Flow
 - Applications fo Machien Learning
 - NLP Real-World Applications
 - NLP Fundamentals
 - CV Real-World Applications
 - CV Fundamentals
-** Social Skills
+*** Social Skills
 - Awareness fo AI ethics, inclusion, bias, privacy
 - Social Perceptiveness, Critical thinking, Problem solving
 - Teamwork: Leadership
 - Communication: Sharing tech in plain and simple language
 
-* Experience
+** Experience
 Delve deeper into Computer Vision through hands-on activities. Complete the Fashion MNIST challenge and develop skills in data collection, model trainiing and code modification.
-** Contents (23 hours)
-*** Worked Example
-**** Data Acquisition(5.)
-**** Data Exploration (Pre-proccessing Images)(6.)
-**** Data Exploration (Image Labeling)(7.)
-**** Modeling(8.)
-**** Evaluation(9.)
-*** Face Detection
-**** OpenVINO(10)
-** Tech Skills
-*** Fundamental Skills
+*** Contents (23 hours)
+**** Worked Example
+***** Data Acquisition(5.)
+***** Data Exploration (Pre-proccessing Images)(6.)
+***** Data Exploration (Image Labeling)(7.)
+***** Modeling(8.)
+***** Evaluation(9.)
+**** Face Detection
+***** OpenVINO(10)
+*** Tech Skills
+**** Fundamental Skills
 - Data Science Project Flow
 - Applications fo Machien Learning
 - NLP Real-World Applications
 - NLP Fundamentals
 - CV Real-World Applications
 - CV Fundamentals
-*** Project-Based Skills
+**** Project-Based Skills
 - Data Acquisition
 - Pre-processing Image
 - Image Labeling
 - Modeling
 - Evaluation
 - OpenVINO^{TM}
-** Social Skills
-*** Awareness fo AI ethics, inclusion, bias, privacy
-*** Social Perceptiveness, Critical thinking, Problem solving
-*** Teamwork
+*** Social Skills
+**** Awareness fo AI ethics, inclusion, bias, privacy
+**** Social Perceptiveness, Critical thinking, Problem solving
+**** Teamwork
 - Leadership
 - Organisational skill
-*** Communication
+**** Communication
 Sharing tech in plain and simple language
 
-* Empower
+** Empower
 Create social impact projects with the skills learnt and influence others to be AI-ready.
-** Contents (24 hours)
-*** (11)
-**** Intorduction to Use Cases
+*** Contents (24 hours)
+**** (11)
+***** Intorduction to Use Cases
 1. AI Medical Exam
 2. AI Security Support System
 3. Car Detection from Traffic Data
@@ -391,34 +361,34 @@ Create social impact projects with the skills learnt and influence others to be 
 5. Energy Saving System in Classroom
 6. AI Security System for Blind
 7. Smoke and Fire Detection
-**** Brainstorming Solutions
-**** Prototyping Solutions
-**** Solution Presentation
-**** Deploying AI solutions
-** Tech Skills
-** Social Skills
+***** Brainstorming Solutions
+***** Prototyping Solutions
+***** Solution Presentation
+***** Deploying AI solutions
+*** Tech Skills
+*** Social Skills
 
-* Schedual
-** Stage 1: Inspire
-*** Module 1 (240): Overview
-**** Class
+** Schedual
+*** Stage 1: Inspire
+**** Module 1 (240): Overview
+***** Class
 Day1, Class 1, Class 2
-** Stage 2: Acquire
-*** Module 2 (120): Statistical Data
-**** Class
+*** Stage 2: Acquire
+**** Module 2 (120): Statistical Data
+***** Class
 Day 1
-*** Module 3 (120): Natural Language Processing
-*** Module 4 (60): Computer Vision
-** Stage 3: Experience
-*** Module 5 (270): Data Acquisition
-*** Module 6 (300): Data Exploration (Preprocessing Images)
-*** Module 7 (90): Data Exploration (Image Labeling)
-*** Module 8 (480): Modeling
-*** Module 9 (120): Evaluation
-*** Module 10 (120): OpenVINO™
-** Stage 4: Empower
-*** Module 11 (24h)– Empower (Social Impact Project Creation)
-** 課表
+**** Module 3 (120): Natural Language Processing
+**** Module 4 (60): Computer Vision
+*** Stage 3: Experience
+**** Module 5 (270): Data Acquisition
+**** Module 6 (300): Data Exploration (Preprocessing Images)
+**** Module 7 (90): Data Exploration (Image Labeling)
+**** Module 8 (480): Modeling
+**** Module 9 (120): Evaluation
+**** Module 10 (120): OpenVINO™
+*** Stage 4: Empower
+**** Module 11 (24h)– Empower (Social Impact Project Creation)
+*** 課表
 |-------------+----------+----------+----------+-----------+-------|
 |       Class | Day 1    | Day 2    | Day 3    | Day 4     | Day 5 |
 |-------------+----------+----------+----------+-----------+-------|
@@ -433,7 +403,7 @@ Day 1
 | 18:30-20:10 |          | Module 6 | Module 8 |           |       |
 |-------------+----------+----------+----------+-----------+-------|
 
-* Skills Outcome Map
+** Skills Outcome Map
 #+CAPTION: Skills Outcome Map
 #+LABEL:fig:skm
 #+name: fig:skm
@@ -442,7 +412,3 @@ Day 1
 #+ATTR_HTML: :width 600
 [[file:images/2021-10-17_17-49-47.png]]
 
-
-* Install openvino for 403 Macmini
-1. copy CMake to /Application
-2.

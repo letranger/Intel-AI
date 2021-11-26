@@ -1,0 +1,31 @@
+#+TITLE: 線上研習
+
+* 內容
+四階段、九模組
+
+- https://www.menti.com/
+- https://www.afiniti.com/corporate/rock-paper-scissors
+- https://research.google.com/semantris
+- https://www.moralmachine.net/hl/zh
+- https://datavizcatalogue.com/
+- https://www.youtube.com/watch?v=BhzhzTvKfrA&t=59s
+- https://www.menti.com/6ixff4epcu
+- https://setosa.io/ev/image-kernels/
+- https://www.cs.ryerson.ca/~aharley/vis/conv/flat.html
+- 講師: melissa@sustainablelivinglab.org
+- https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&index=1
+- https://www.analyticsvidhya.com/blog/2021/06/confusion-matrix-for-multi-class-classification/
+- https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+- https://cs.stanford.edu/people/karpathy/convnetjs/demo/mnist.html
+- loopy
+
+
+* 為何model中各層的神經元數為2^n
+[3:34 PM] Melissa
+    为什么人们在指定神经网络层中的节点数时倾向于使用2的幂？
+据我们所知，没有研究决定性地表明，使用二的幂在任何方面都是最佳的选择超参数，如批量大小和给定层中的节点数。
+有一些论文声称使用二的幂可以获得最好的性能，但它们完全没有根据。加入二的力量仅仅是一个被社区采用的启发。
+尽管硬件的某些特性在以2的幂形式存储的内存块被传递时工作效率更高，但可以说，只有在精心设计的条件下才能实现任何增益，当然不能仅仅将批处理大小设置为32。混杂因素在起作用。
+深度学习，特别是超参数选择，是一门艺术。网络的最优超参数依赖于系统，难以捉摸，而且成本极高。例如，假设您正试图通过调整批处理大小来优化网络的性能。批量大小可以取1到10000之间的任何值。为了找到最佳的批量大小，你可以通过训练10000个不同的网络，每个网络都使用不同的批量大小来强制你的方法。
+在考虑噪声之后，您会发现批处理大小为10的性能可能与批处理大小为12的性能相同。128的批处理大小将执行与140的批处理大小非常相似的操作。但是，500的批处理大小可能与5的批处理大小有很大的不同。
+不必搜索10000个不同的批大小，只需输入2的幂就可以搜索13个（2、4、8、16、32、64、128、256、512、1024、2048、4096、8192），很可能得到性能非常接近最佳值的批大小。以二的幂搜索以对数方式缩小搜索空间。想象一下，如果突然有两个超参数需要调整，它们的范围都在1到10000之间。使用暴力，你的搜索空间需要O（10^8）个实验。在深度学习中使用两个启发式的力量，你的搜索空间将是O（10^2）。这是维度的诅咒，两个启发式的力量有助于减轻它。

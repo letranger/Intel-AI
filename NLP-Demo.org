@@ -1,0 +1,652 @@
+#+TITLE: NLP-DEMO
+#+OPTIONS: ^:nil
+#+SETUPFILE: ../themes/readtheorg_inline/readtheorg_inline.theme
+* 特徵擷取
+如何處理類別變數(categorical variable)/名義變數(nominal variable)
+為何要處理? 因為要計算。
+** 例: 出生地
+|---------+-----------|
+| user    | city      |
+|---------+-----------|
+| James   | Taipei    |
+| Ruby    | Tainan    |
+| Vanessa | Kaohsiung |
+|---------+-----------|
+*** solution 1
+以數值代替city，例
+|---------+------|
+| user    | city |
+|---------+------|
+| James   |    1 |
+| Ruby    |    2 |
+| Vanessa |    3 |
+|---------+------|
+問題: Kaohsiung的城市值為Taipei的三倍
+** One Hot Encoding
+#+begin_src python -r -n :results output :exports both
+from sklearn.feature_extraction import DictVectorizer
+onehot_encoder = DictVectorizer()
+X = [
+    {'city': 'Taipei'},
+    {'city': 'Tainan'},
+    {'city': 'Kaohsiung'}
+]
+print(onehot_encoder.fit_transform(X).toarray())
+#+end_src
+
+#+RESULTS:
+: [[0. 0. 1.]
+:  [0. 1. 0.]
+:  [1. 0. 0.]]
+** 從文本中提取特徵
+兩種常用的文本表示形式: 詞袋模型(bag-of-words)及字嵌入(word wmbedding)
+*** 詞袋模型(bag-of-words model)
+**** 語料庫(corpus)
+#+begin_src python -r -n :results output :exports both
+corpus = [
+    'UNC played Duke in basketball',
+    'Duke lost the basetball game'
+]
+#+end_src
+這個語料庫包含8個「字詞」，這組存了語料庫的*詞彙(vocabulary)* ，詞袋模型使用一個特徵向量(feature vector)來表示每個文件(document)，所以每個文件由「包含8個元素的向量」來表示。組成一個特徵量的元素數量稱為*向量維度(vector's dimension)*，一個字典(dictionary)會把「詞彙」映射到feature vector的index。
+#+begin_src python -r -n :results output :exports both
+from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+    'UNC played Duke in basketball',
+    'Duke lost the basetball game'
+]
+vectorizer = CountVectorizer()
+print(vectorizer.fit_transform(corpus).todense())
+print(vectorizer.vocabulary_)
+# 加入第三份文件
+corpus.append('I ate a sandwich')
+print(vectorizer.fit_transform(corpus).todense())
+print(vectorizer.vocabulary_)
+#+end_src
+
+#+RESULTS:
+: [[0 1 1 0 1 0 1 0 1]
+:  [1 0 1 1 0 1 0 1 0]]
+: {'unc': 8, 'played': 6, 'duke': 2, 'in': 4, 'basketball': 1, 'lost': 5, 'the': 7, 'basetball': 0, 'game': 3}
+: [[0 0 1 1 0 1 0 1 0 0 1]
+:  [0 1 0 1 1 0 1 0 0 1 0]
+:  [1 0 0 0 0 0 0 0 1 0 0]]
+: {'unc': 10, 'played': 7, 'duke': 3, 'in': 5, 'basketball': 2, 'lost': 6, 'the': 9, 'basetball': 1, 'game': 4, 'ate': 0, 'sandwich': 8}
+**** 如何比較兩份文件的相關程度(距離)
+***** 歐幾里德距離
+***** 歐幾里德範數(Euclidean norm) / $L^2$ norm
+$$ d = \left\| {x_0 - x_1} \right\| $$
+一個vector的Euclidean norm為該數的magnitude(量級)，:
+$$ \left\|x\right\| = \sqrt{x_1^2 + x_2^2 + ... + x_n^2 } $$
+可以使用scikit-learn函式庫的euclidean_distance function來計算兩個或多個vector的distance:
+#+begin_src python -r -n :results output :exports both
+from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+    'He is a senior high school student',
+    'She teach English in a senior high schyool',
+    'Queen will miss Remembrance Sunday service after spraining her back'
+]
+vectorizer = CountVectorizer()
+
+print(vectorizer.fit_transform(corpus).todense())
+print(vectorizer.vocabulary_)
+
+from sklearn.metrics.pairwise import euclidean_distances
+X = vectorizer.fit_transform(corpus).todense()
+print('Distance between 1st and 2st documents:', euclidean_distances(X[0], X[1]))
+print('Distance between 1st and 3st documents:', euclidean_distances(X[0], X[2]))
+print('Distance between 2st and 3st documents:', euclidean_distances(X[1], X[2]))
+#+end_src
+
+#+RESULTS:
+: [[0 0 0 1 0 1 0 1 0 0 0 1 0 1 0 0 0 1 0 0 0]
+:  [0 0 1 0 0 1 1 0 0 0 0 0 1 1 0 1 0 0 0 1 0]
+:  [1 1 0 0 1 0 0 0 1 1 1 0 0 0 1 0 1 0 1 0 1]]
+: {'he': 3, 'is': 7, 'senior': 13, 'high': 5, 'school': 11, 'student': 17, 'she': 15, 'teach': 19, 'english': 2, 'in': 6, 'schyool': 12, 'queen': 9, 'will': 20, 'miss': 8, 'remembrance': 10, 'sunday': 18, 'service': 14, 'after': 0, 'spraining': 16, 'her': 4, 'back': 1}
+: Distance between 1st and 2st documents: [[3.]]
+: Distance between 1st and 3st documents: [[4.]]
+: Distance between 2st and 3st documents: [[4.12310563]]
+***** Curse of dimensionality
+可以發現，如果文件量大而且主題相去甚遠，則
+- 代表document的vector會包含成千上萬的元素
+- 每個vector裡會包含很多0，即稀疏向量(sparse vectors)
+使用這種「高維度資料」會為所有的機器學習任務帶來一些問題，即「維數災難/維度詛咒」(curse of dimensionality):
+1. 「高維度資料」比「低維度資料」需要更多的記憶體和計算能力，
+2. 隨著feature vector空間維度的增加，model就需要更多的「訓練資料」，以確保有足夠多的訓練實例(instance)，否則將導致「過度擬合」。
+***** 如何解決curse of dimensionality
+- 將文本均轉為小寫
+- 過濾停用字
+**** 停用字過濾
+即刪除語料庫大部份文件中「經常出現的字詞」，即停用字(stop words)，如
+- determiner: the, a, an等限定詞
+- auxiliary verbs: 如do, be, will等助動詞
+- perpositions: 如on, around, beneath等介系詞
+停用字通常是「虛詞/功能詞」(functional words)，CountVectorizer可以透過stop_words關鍵字參數來過濾，它本身有一個英語停用字基本列表。
+#+begin_src python -r -n :results output :exports both
+from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+    'He is a senior high school student',
+    'She teach English in a senior high schyool',
+    'Queen will miss Remembrance Sunday service after spraining her back'
+]
+
+vectorizer = CountVectorizer(stop_words='english')
+X = vectorizer.fit_transform(corpus).todense()
+print(X)
+print(vectorizer.vocabulary_)
+from sklearn.metrics.pairwise import euclidean_distances
+print('Distance between 1st and 2st documents:', euclidean_distances(X[0], X[1]))
+print('Distance between 1st and 3st documents:', euclidean_distances(X[0], X[2]))
+print('Distance between 2st and 3st documents:', euclidean_distances(X[1], X[2]))
+#+end_src
+
+#+RESULTS:
+: [[0 1 0 0 0 1 0 1 0 0 1 0 0]
+:  [1 1 0 0 0 0 1 1 0 0 0 0 1]
+:  [0 0 1 1 1 0 0 0 1 1 0 1 0]]
+: {'senior': 7, 'high': 1, 'school': 5, 'student': 10, 'teach': 12, 'english': 0, 'schyool': 6, 'queen': 3, 'miss': 2, 'remembrance': 4, 'sunday': 11, 'service': 8, 'spraining': 9}
+: Distance between 1st and 2st documents: [[2.23606798]]
+: Distance between 1st and 3st documents: [[3.16227766]]
+: Distance between 2st and 3st documents: [[3.31662479]]
+**** 詞幹提取與詞性還原(Stemming and Lemmatization)
+***** Stemming
+詞干提取是去除單詞的前後綴得到詞根的過程。
+大家常見的前後詞綴有「名詞的複數」、「進行式」、「過去分詞」…
+如: plays, played, playing -> play
+***** Lemmatization
+詞形還原是基於詞典，將單詞的複雜形態轉變成最基礎的形態。
+詞形還原不是簡單地將前後綴去掉，而是會根據詞典將單詞進行轉換。比如「drove」會轉換為「drive」。
+如: is, are , been -> be
+***** Demo
+#+begin_src python -r -n :results output :exports both
+# Download wordnet
+import nltk
+nltk.download('wordnet')
+# Lemmatization
+from nltk.stem.wordnet import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
+print(lemmatizer.lemmatize('gathering', 'v'))
+print(lemmatizer.lemmatize('gathering', 'n'))
+# Stemming
+from nltk.stem import PorterStemmer
+stemmer = PorterStemmer()
+print(stemmer.stem('gathering'))
+print(stemmer.stem('gathered'))
+#+end_src
+
+#+RESULTS:
+: gather
+: gathering
+: gather
+: gather
+***** 還原corpus詞性
+#+begin_src python -r -n :results output :exports both
+from nltk import word_tokenize
+from nltk.stem import PorterStemmer
+from nltk.stem.wordnet import WordNetLemmatizer
+from nltk import pos_tag
+
+import nltk
+nltk.download('punkt')
+
+wordnet_tag = ['v', 'n']
+corpus = [
+    'He ate the sandwiches',
+    'Every sandwich was eaten by him'
+]
+# Stemming
+stemmer = PorterStemmer()
+for document in corpus:
+    print('\nStemmed: ', end='')
+    for token in word_tokenize(document):
+        print(stemmer.stem(token), end=', ')
+
+# lemmatization
+nltk.download('averaged_perceptron_tagger')
+def lemmatize(token, tag):
+    if tag[0].lower() in wordnet_tag:
+        return lemmatizer.lemmatize(token, tag[0].lower())
+    return token
+
+lemmatizer = WordNetLemmatizer()
+tagged_corpus = [pos_tag(word_tokenize(document)) for document in corpus]
+for document in tagged_corpus:
+    print('\nLemmization: ', end='')
+    for token, tag in document:
+        print(lemmatize(token, tag), end=', ')
+print('\n',tagged_corpus)
+#+end_src
+
+#+RESULTS:
+:
+: Stemmed: he, ate, the, sandwich,
+: Stemmed: everi, sandwich, wa, eaten, by, him,
+: Lemmization: He, eat, the, sandwich,
+: Lemmization: Every, sandwich, be, eat, by, him,
+:  [[('He', 'PRP'), ('ate', 'VBD'), ('the', 'DT'), ('sandwiches', 'NNS')], [('Every', 'DT'), ('sandwich', 'NN'), ('was', 'VBD'), ('eaten', 'VBN'), ('by', 'IN'), ('him', 'PRP')]]
+**** TF-IDF權重擴充詞袋
+在「詞袋模型」中，無論字詞是否出現在document中，corpus字典中的字詞都會進行編碼，但「語法]、「字詞順序」、「詞類」都不會編碼。
+依照常理，一個字詞在document中出現的頻率應該可以代表該document與字詞的相關程度。為減輕幫feature vector建立「詞類」特徵編碼的編碼負擔，可以使用整數來表示字詞出現在文字中的次數。
+#+begin_src python -r -n :results output :exports both
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = ['The dog ate a sandwich, the wizard transfigured a sandwich, and I ate a sandwich']
+vectorizer = CountVectorizer(stop_words='english')
+frequencies = np.array(vectorizer.fit_transform(corpus).todense())[0]
+print(frequencies)
+print('Token indices:', vectorizer.vocabulary_)
+
+for token, index in vectorizer.vocabulary_.items():
+    print('Token {0:s} : {1:d} times'.format(token, frequencies[index]))
+#+end_src
+
+#+RESULTS:
+: [2 1 3 1 1]
+: Token indices: {'dog': 1, 'ate': 0, 'sandwich': 2, 'wizard': 4, 'transfigured': 3}
+: Token dog : 1 times
+: Token ate : 2 times
+: Token sandwich : 3 times
+: Token wizard : 1 times
+: Token transfigured : 1 times
+
+**** 問題1: document長度不同(只考慮raw term frequency的問題)
+如果我們對feature vector中對「原始詞頻(raw term frequency)」進行編碼，可以為「文件的意義」提供額外的資訊，但前提是要假設所有文件都有相似的長度。許多字詞也許在兩個文件中出現相同次數，但如果這兩份文件長度差異太大，則兩份文件在意義上仍可能會有很大的差異。
+***** 解決之道
+scikit-learn函式庫中的TfidfTransformer類別可以透過將「詞頻向量矩陣」(a matrix of term frequency vectors)轉換為一個「常態化詞頻權重矩陣」(a matrix of normalized term frequency weights)來緩和上述問題。
+- TfidTransformer類別對raw term frequency做平滑(smooth)處理，並對其進行$L^2$ 常態化(normalization)。平滑化、常態化後的詞頻可以由以下公式取得:
+  $$ df(t,d)=\frac{f(t,d)}{\left\|x\right\|} $$
+  $f(t,d)$ 表示「字詞」在document中出現的frequency； $\left\|x\right\|$ 為詞頻向量的$L^2$ 範數。
+- 除了對raw term frequency進行常態化，還可以透過計算詞頻的「對數」(logarithm)將頻數縮放到一個「有限的範圍」內，來改善feature vector.詞頻的對放縮放值(logarithmically scaled term frequencies) 公式如下：
+  $$ fd(t,d)=1+\log f(t,d) $$
+  當sublinear_tf關鍵字參數設置為True時，TfidTransformer就會計算「詞頻的對數縮放值」。
+上述「常態化」及「對數縮放」後的詞頻就可以代表一個document中「字詞」出現的頻數，也能緩和不同文件大小的影響。但仍存在一個
+問題: feature vector的權重資訊對於比較文件意義並無幫助。
+**** 問題2: feature vector的權重資訊對於比較文件意義並無幫助
+一份關於「杜克大學籃球隊」文章的語料庫，其大部份document中可能都包含了coach, trip, flop等字詞，這些字詞可能因出現太過頻繁被當成停用字，同時對計算document相似性也沒有幫助。
+***** 解決: IDF
+反向文件頻率(Inverse Document Frequency, IDF)是一種衡量一個字詞在語料庫中是否「稀有」或是「常見」的方式。反向文件頻率公式如下：
+$$ idf(t,D)=\log \frac{N}{1+|d\in D:t\in d|} $$
+其中，$N$ 是corpus中的文件總數；$1+\lvert d\in D: t\in d \rvert$ 是corpus中包含該字卜呞的文件總數。一個字詞的tf-idf value是其「詞頻」和「反向文件頻率」的乘積。當use_idf關鍵字參數被設為預設值True，TfidTransformer將回傳tf-idf權重。由於tf-idf feature vector經常用於表示文本，scikit-learn函式庫提供了一個TfidVectorizer轉換器類別，它封裝了CountVectorizer類別和TfidTransformer類別，讓我們使用TfidVectorizer類別，為corpus建立tf-idf feature vector。
+#+begin_src python -r -n :results output :exports both
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+corpus = [
+    'The dog ate a sandwich and I ate a sandwich',
+    'The wizard transfigured a sandwich'
+]
+
+vectorizer = TfidfVectorizer(stop_words='english')
+print(vectorizer.fit_transform(corpus).todense())
+#+end_src
+
+#+RESULTS:
+: [[0.75458397 0.37729199 0.53689271 0.         0.        ]
+:  [0.         0.         0.44943642 0.6316672  0.6316672 ]]
+*** 字嵌入(word embedding)
+- Word embedding是一種減輕bag-of-words model缺點的文本標記法，bag-of-words使用一個「純量」(scalar: 只有大小、沒有方向)表示一個「字符」(token)；而word embedding則使用一個「向量」(vector)。
+- 向量經常會被壓縮，其維度可以從 50到5000。
+- word embedding就是一種傳入參數的函數，接受一個來自語言的token，產生一個vector。這個函數本質上就是一個word embedding matrix參數化的查閱資料表。
+**** 例1: word embedding matrix如何學習
+一個word embedding matrix的參數通常是透過訓練一個不同任務的model來學習。例如：要訓練一個語言模型，用來預測一個包含了某種語言的五個「字詞」的「序列」是否有效。
+***** 訓練資料集
+基本上包含兩類資料:
+1. 字詞序列tuples:
+   - 正向實例(positive instances): 可以由大型語料庫提取，產生正向實例，例如，由Google新聞、維基百科、Common Crawl等網站；例：the Duke basketball player flopped.
+   - 負向實例(negative instances): 再由這些語料庫中隨機找出字詞來替換正向實例中的字詞，就能產生負向實例，例: the Duke basetball player potato.
+2. 標明上述序列是否有效的label(True/False)
+***** 本例的word embedding model架構
+word embedding model主要有兩個元件：
+1. word embedding function: 輸入一個「字符」、生成一個「向量」。其初始參數是隨機生成，然後隨著classifier的訓練來更新。
+2. binary classifier: 一個用於「預測」5個向量是否表示一個「有效字符序列」的binary classifier
+運作原理:
+- 將一個有效序列中的字詞替換為一個意思相近的字詞可能會產生一個有效的序列，如果the small cat is grumpy和the small kitten is grumpy都是有效序列，模型就可能會把cat和kitten都表示為相同的向量。
+- 將一個有效序的的字詞用不個不相關的字取取代，可能會產生一個無效序列(an invalid sequence)，
+- 學習演算法會更新word embedding function的參數
+- the small cat was grumpy和the small sandwich was grumpy只有一個字詞不同，若classifier把後者分類為無效序列，表示cat和sandwich的向量不同
+- 透過上述對「分類」有效字符序列的學習，模型建立了能夠對「相似含義的字詞」產生「相似向量」的word embedding function，例如同義詞(small和tiny)、同等字詞(UNC和Duke)所生成的向量應該相似；而表示反義詞(big和small)的向量應該只在一個或很少的維度上相似。而「上義詞」和其「下義詞」(color和blue、furniture和chair)的向量則只在少數的維度上有差義。
+**** word embedding優於bag-of-words之處
+假設有一個包含文件the dog was happy的語料庫，若這個語料庫的字詞並不包含puppy或sad，當碰到像the dog was sad這樣的句子時，一個使用bag-of-words model的「情感分析模型」將無法處理，但word embedding model就更具備有效的一般化能力。
+**** DEMO
+在一個大型語料庫上訓練一個如範例中的「序列分類器」會耗費大量的計算能力，但是產生的word embedding可以被應用到許多領域。以下是Google新聞語料庫上訓練過的word2vec word embedding，讓語料庫包含超過1000億個字詞，同時word2vec word embedding也包含了針對超過300萬個英語字詞的300維向量。這裡使用Python函式庫gensim來檢查模型，衡量字詞的相似度，並完成類比。
+#+begin_src python -r -n :results output :exports both
+# See https://radimrehurek.com/gensim/install.html for gensim installation instructions
+# Download and gunzip the word2vec embeddings from
+# https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing
+import gensim
+
+# The model is large
+model = gensim.models.KeyedVectors.load_word2vec_format('~/Downloads/GoogleNews-vectors-negative300.bin', binary=True)
+
+# Let's inspect the embedding for "cat"
+embedding = model.word_vec('scorpio')
+print("Dimensions: %s" % embedding.shape)
+#print(embedding)
+
+# The vectors for semantically similar words are more similar than the vectors for semantically dissimilar words
+print('Similarity between cat and dog: ',model.similarity('cat', 'dog'))
+print('Similarity between cat and sandwich: ',model.similarity('cat', 'sandwich'))
+
+# Puppy is to cat as kitten is to...
+print(model.most_similar(positive=['puppy', 'cat'], negative=['kitten'], topn=1))
+
+# Palette is to painter as saddle is to...
+for i in model.most_similar(positive=['saddle', 'painter'], negative=['palette'], topn=3):
+    print(i)
+
+# computer keyboard
+print('-------------')
+for i in model.most_similar(positive=['computer', 'keyboard'], negative=['book'], topn=5):
+    print(i)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Dimensions: 300
+Similarity between cat and dog:  0.76094574
+Similarity between cat and sandwich:  0.17211203
+[('dog', 0.7762665748596191)]
+('saddles', 0.5282258987426758)
+('horseman', 0.5179382562637329)
+('jockey', 0.48861294984817505)
+-------------
+('keyboards', 0.6311742663383484)
+('laptop', 0.5458759069442749)
+('computers', 0.5405977368354797)
+('trackball_mouse', 0.5322054624557495)
+('MIDI_keyboard', 0.5307092070579529)
+#+end_example
+
+* 垃圾郵件過濾
+** DataSet
+#+begin_src python -r -n :results output :exports both
+import pandas as pd
+df = pd.read_csv('./smsspamcollection/SMSSpamCollection', delimiter='\t', header=None)
+print(df.head())
+print('Number of spam messages: %s' % df[df[0] == 'spam'][0].count())
+print('Number of ham messages: %s' % df[df[0] == 'ham'][0].count())
+#+end_src
+
+#+RESULTS:
+:       0                                                  1
+: 0   ham  Go until jurong point, crazy.. Available only ...
+: 1   ham                      Ok lar... Joking wif u oni...
+: 2  spam  Free entry in 2 a wkly comp to win FA Cup fina...
+: 3   ham  U dun say so early hor... U c already then say...
+: 4   ham  Nah I don't think he goes to usf, he lives aro...
+: Number of spam messages: 747
+: Number of ham messages: 4825
+** LogisticRegression
+#+begin_src python -r -n :results output :exports both
+import pandas as pd
+df = pd.read_csv('./smsspamcollection/SMSSpamCollection', delimiter='\t', header=None)
+
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+#from sklearn.linear_model.logistic import LogisticRegression
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split, cross_val_score
+
+X = df[1].values # mail label
+y = df[0].values # mail content
+X_train_raw, X_test_raw, y_train, y_test = train_test_split(X, y)
+vectorizer = TfidfVectorizer()
+X_train = vectorizer.fit_transform(X_train_raw)
+X_test = vectorizer.transform(X_test_raw)
+classifier = LogisticRegression()
+classifier.fit(X_train, y_train)
+predictions = classifier.predict(X_test)
+for i, prediction in enumerate(predictions[:5]):
+    print('Predicted: %s, message: %s' % (prediction, X_test_raw[i]))
+
+# Evaluate performace
+score = cross_val_score(classifier, X_train, y_train, cv=10)
+print("Accuracy Score: ", score)
+# Confusion matrix
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+print(y_test[:5])
+print(predictions[:5])
+# replace spame, ham to  1, 0
+test = np.where(y_test=='ham', 0, y_test)
+test[test=='spam'] = 1
+pred = np.where(predictions=='ham', 0, predictions)
+pred[pred=='spam'] = 1
+# draw
+confusion_matrix = confusion_matrix(list(test), list(pred))
+print(confusion_matrix)
+plt.matshow(confusion_matrix)
+plt.title('Confusion matrix')
+plt.colorbar()
+plt.ylabel('True label')
+plt.xlabel('Predicted label')
+plt.show()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Predicted: ham, message: Good sleep is about rhythm. The person has to establish a rhythm that the body will learn and use. If you want to know more :-)
+Predicted: ham, message: Ok but tell me half an hr b4 u come i need 2 prepare.
+Predicted: ham, message: Gibbs unsold.mike hussey
+Predicted: ham, message: What you need. You have a person to give na.
+Predicted: ham, message: Dunno da next show aft 6 is 850. Toa payoh got 650.
+Accuracy Score:  [0.97129187 0.95933014 0.95215311 0.9569378  0.95454545 0.96650718
+ 0.95215311 0.94258373 0.94497608 0.96402878]
+['ham' 'ham' 'ham' 'ham' 'ham']
+['ham' 'ham' 'ham' 'ham' 'ham']
+[[1222    1]
+ [  31  139]]
+#+end_example
+準確率是用來評估分類器預測正確比例的工具，但無法區分
+** Confusion matrix
+#+begin_src python -r -n :results output :exports both
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+
+y_test = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+y_pred = [0, 1, 0, 0, 0, 0, 0, 1, 1, 1]
+confusion_matrix = confusion_matrix(y_test, y_pred)
+print(confusion_matrix)
+plt.matshow(confusion_matrix)
+plt.title('Confusion matrix')
+plt.colorbar()
+plt.ylabel('True label')
+plt.xlabel('Predicted label')
+plt.show()
+#+end_src
+
+#+RESULTS:
+: [[4 1]
+:  [2 3]]
+
+* DEMO
+#+begin_src python -r -n :results output :exports both
+# coding: utf-8
+import sys
+import json
+from gensim.models import doc2vec
+from collections import namedtuple
+
+
+# Load data
+raw_doc = ["I love machine learning. Its awesome.",
+        "I love coding in python",
+        "I love building chatbots",
+        "they chat amagingly well"]
+
+
+# Preprocess
+docs = []
+analyzedDocument = namedtuple('AnalyzedDocument', 'words tags')
+for index, text in enumerate(raw_doc):
+    words = text.split()
+    docs.append(analyzedDocument(words, [index]))
+
+
+# Train
+model = doc2vec.Doc2Vec(docs, vector_size=20, window=300, min_count=1, workers=4, dm=1)
+
+
+# Save
+model.save('doc2vec.model')
+
+
+# Load
+model = doc2vec.Doc2Vec.load('doc2vec.model')
+print(model.docvecs[1].shape)
+print(model.docvecs[1])
+#+end_src
+
+#+RESULTS:
+: (20,)
+: [-0.01887621  0.01302744 -0.02849153  0.0131293   0.02904045 -0.04056058
+:  -0.04169167 -0.04981408  0.02464924 -0.04563693  0.02922578  0.0340294
+:  -0.03257207 -0.02262998 -0.00628912  0.00822178 -0.00741135 -0.04270934
+:  -0.01805406  0.00866313]
+* jeiba DEMO
+- https://leemeng.tw/shortest-path-to-the-nlp-world-a-gentle-guide-of-natural-language-processing-and-deep-learning-for-everyone.html
+- [[https://medium.com/ml-note/word-embedding-3ca60663999d][Word Embedding 編碼矩陣]]
+- [[https://medium.com/@mishra.thedeepak/doc2vec-simple-implementation-example-df2afbbfbad5][DOC2VEC gensim tutorial]]
+- [[https://www.twblogs.net/a/5db38150bd9eee310ee69608][Doc2Vec模型的介紹與gensim中Doc2Vec的使用]]
+- [[https://clay-atlas.com/blog/2020/07/14/python-cn-nlp-gensim-doc2vec-model/][如何訓練 Doc2Vec 模型]]
+#+begin_src python -r -n :results output :exports both
+import jieba.posseg as pseg
+
+text = '我是王小明，在台南讀書的學生，我喜歡喝咖啡、不喜歡讀書'
+words = pseg.cut(text)
+wordList = []
+for w, f in words:
+    wordList.append(w)
+    print(w, f)
+
+print(wordList)
+word_index = {
+    word: idx
+    for idx, word in enumerate(wordList)
+}
+print(word_index)
+print(wordList)
+print([word_index[w] for w in wordList])
+#+end_src
+
+#+RESULTS:
+#+begin_example
+我 r
+是 v
+王小明 nr
+， x
+在 p
+台南 ns
+讀書 n
+的 uj
+學生 n
+， x
+我 r
+喜歡 v
+喝咖啡 nr
+、 x
+不 d
+喜歡 v
+讀書 n
+['我', '是', '王小明', '，', '在', '台南', '讀書', '的', '學生', '，', '我', '喜歡', '喝咖啡', '、', '不', '喜歡', '讀書']
+{'我': 10, '是': 1, '王小明': 2, '，': 9, '在': 4, '台南': 5, '讀書': 16, '的': 7, '學生': 8, '喜歡': 15, '喝咖啡': 12, '、': 13, '不': 14}
+['我', '是', '王小明', '，', '在', '台南', '讀書', '的', '學生', '，', '我', '喜歡', '喝咖啡', '、', '不', '喜歡', '讀書']
+[10, 1, 2, 9, 4, 5, 16, 7, 8, 9, 10, 15, 12, 13, 14, 15, 16]
+#+end_example
+
+#+begin_src python -r -n :results output :exports both
+# coding: utf-8
+import sys
+import json
+from gensim.models import doc2vec
+from collections import namedtuple
+
+
+# Load data
+raw_doc = ["I love machine learning. Its awesome.",
+        "I love coding in python",
+        "I love building chatbots",
+        "they chat amagingly well"]
+
+
+# Preprocess
+docs = []
+analyzedDocument = namedtuple('AnalyzedDocument', 'words tags')
+for index, text in enumerate(raw_doc):
+    words = text.split()
+    docs.append(analyzedDocument(words, [index]))
+
+
+# Train
+model = doc2vec.Doc2Vec(docs, vector_size=20, window=300, min_count=1, workers=4, dm=1)
+
+
+# Save
+model.save('doc2vec.model')
+
+
+# Load
+model = doc2vec.Doc2Vec.load('doc2vec.model')
+print(model.docvecs[1].shape)
+print(model.docvecs[1])
+#+end_src
+
+#+RESULTS:
+: (20,)
+: [-0.01887621  0.01302744 -0.02849153  0.0131293   0.02904045 -0.04056058
+:  -0.04169167 -0.04981408  0.02464924 -0.04563693  0.02922578  0.0340294
+:  -0.03257207 -0.02262998 -0.00628912  0.00822178 -0.00741135 -0.04270934
+:  -0.01805406  0.00866313]
+* jeiba DEMO
+- https://leemeng.tw/shortest-path-to-the-nlp-world-a-gentle-guide-of-natural-language-processing-and-deep-learning-for-everyone.html
+- [[https://medium.com/ml-note/word-embedding-3ca60663999d][Word Embedding 編碼矩陣]]
+- [[https://medium.com/@mishra.thedeepak/doc2vec-simple-implementation-example-df2afbbfbad5][DOC2VEC gensim tutorial]]
+- [[https://www.twblogs.net/a/5db38150bd9eee310ee69608][Doc2Vec模型的介紹與gensim中Doc2Vec的使用]]
+- [[https://clay-atlas.com/blog/2020/07/14/python-cn-nlp-gensim-doc2vec-model/][如何訓練 Doc2Vec 模型]]
+#+begin_src python -r -n :results output :exports both
+import jieba.posseg as pseg
+
+text = '我是王小明，在台南讀書的學生，我喜歡喝咖啡、不喜歡讀書'
+words = pseg.cut(text)
+wordList = []
+for w, f in words:
+    wordList.append(w)
+    print(w, f)
+
+print(wordList)
+word_index = {
+    word: idx
+    for idx, word in enumerate(wordList)
+}
+print(word_index)
+print(wordList)
+print([word_index[w] for w in wordList])
+#+end_src
+
+#+RESULTS:
+#+begin_example
+我 r
+是 v
+王小明 nr
+， x
+在 p
+台南 ns
+讀書 n
+的 uj
+學生 n
+， x
+我 r
+喜歡 v
+喝咖啡 nr
+、 x
+不 d
+喜歡 v
+讀書 n
+['我', '是', '王小明', '，', '在', '台南', '讀書', '的', '學生', '，', '我', '喜歡', '喝咖啡', '、', '不', '喜歡', '讀書']
+{'我': 10, '是': 1, '王小明': 2, '，': 9, '在': 4, '台南': 5, '讀書': 16, '的': 7, '學生': 8, '喜歡': 15, '喝咖啡': 12, '、': 13, '不': 14}
+['我', '是', '王小明', '，', '在', '台南', '讀書', '的', '學生', '，', '我', '喜歡', '喝咖啡', '、', '不', '喜歡', '讀書']
+[10, 1, 2, 9, 4, 5, 16, 7, 8, 9, 10, 15, 12, 13, 14, 15, 16]
+#+end_example
