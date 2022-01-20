@@ -1,0 +1,52 @@
+#+TITLE: 403教室使用說明
+#+OPTIONS: toc:nil
+# -*- org-export-babel-evaluate: nil -*-'
+#+TAGS: Intel, AI4Y
+#+OPTIONS: toc:1
+#+include: ../web.org
+
+* Mac OS教學
+- [[https://support.apple.com/zh-tw/HT201236][Mac 鍵盤快速鍵]]
+
+* OpenVINO開發環境
+** Anaconda-Navigator
+1. 於Docker上開啟Anaconda-Navigator
+   #+CAPTION: Caption
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 500
+[[file:images/step1.jpeg]]
+2. 點選Environments
+3. 選擇使用ai4y環境
+   #+CAPTION: Caption
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 500
+[[file:images/step.jpeg]]
+4. 點選Open with Jupyter Notebook
+#+CAPTION: Caption
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 500
+[[file:images/step4.jpeg]]
+
+* 安裝套件
+1. 開啟終端機(Terminal / iTerm)
+   #+CAPTION: Caption
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 300
+#+ATTR_ORG: :width 300
+#+ATTR_HTML: :width 500
+[[file:images/step5.jpeg]]
+2. 切換至ai4y執行環境
+#+begin_src shell -r -n :results output :exports both
+conda activate ai4y
+conda install 套件名稱
+#+end_src

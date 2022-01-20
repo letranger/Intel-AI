@@ -1,0 +1,62 @@
+#+TITLE: Install
+
+1. Install cmake
+   - 東西在 NAS
+2. Add /Applications/CMake.app/Contents/bin to path (for default install)
+   edit .bashrc file,加入
+   #+begin_src shell -r -n :source /opt/anaconda3/etc/profile.d/conda.sh
+conda update -n base -c defaults conda
+conda create --name openvino_env
+conda activate openvino_env
+
+cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
+./install_prerequisites.sh
+
+python -m pip install --upgrade pip
+
+
+cd ~/Desktop
+git clone https://github.com/openvinotoolkit/openvino_notebooks.git
+cd ~/Desktop/openvino_notebooks
+pip install -r requirements.txt
+
+
+conda install openvino-ie4py -c intel
+conda install -c anaconda ipykernel
+pip install ipykernel
+pip install matplotlib
+pip install opencv-python
+cd /opt/anaconda3/lib/python3.8/site-packages
+cp -r /opt/intel/openvino_2021.4.689/python/python3.8/openvino .
+python -m ipykernel install --user --name openvino_env
+
+
+
+mo
+sh demo_benchmark_app.sh
+sh demo_security_barrier_camera.sh
+sh demo_squeezenet_download_convert_run.sh
+#+end_src
+
+#+RESULTS:
+
+8. Install cv2
+   #+begin_src shell -r -n :results output :exports both
+pip3 install --user opencv-python
+   #+end_src
+
+   #+RESULTS:
+   : Collecting opencv-python
+   :   Using cached https://files.pythonhosted.org/packages/8b/9f/879a48a4d4361d1784728be8543f5c8b2b681db500c9e6854f0654645c3d/opencv_python-4.5.4.58-cp37-cp37m-macosx_10_15_x86_64.whl
+   : Collecting numpy>=1.14.5 (from opencv-python)
+   :   Using cached https://files.pythonhosted.org/packages/5d/e4/1178a2e82d1c9abd696496d4f0fc2d09e346b43101829e08eb3ee558fd5d/numpy-1.21.4-cp37-cp37m-macosx_10_9_x86_64.whl
+   : Installing collected packages: numpy, opencv-python
+   : Successfully installed numpy-1.21.4 opencv-python-4.5.4.58
+
+9. copy openvino to site_package
+   #+begin_src shell -r -n :results output :exports both
+cd /opt/anaconda3/lib/python3.8/site-packages
+cp -r /opt/intel/openvino_2021.4.689/python/python3.8/openvino .
+   #+end_src
+
+   #+RESULTS:

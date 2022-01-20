@@ -3,6 +3,48 @@
 #+OPTIONS: ^:nil
 #+Include: ../purpleweb.org
 
+* zsh
+** install
+#+begin_src shell -r -n :results output :exports both
+cd /Users/student
+export PATH=/usr/local/bin:$PATH
+brew install zsh zsh-completions
+brew install zsh-syntax-highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+brew tap homebrew/cask-fonts
+brew install font-meslo-for-powerline
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+brew cleanup
+
+#+end_src
+** .zshrc
+#+begin_src shell -r -n :results output :exports both
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+export TERM="xterm-256color"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#+end_src
+
 * NCS2
 
 「VPU」乃 Movidius 對自家處理器的稱為，全稱為 Vision Processing Unit「視覺處理器」。它是一枚專注於處理影像分析的處理器，與 CPU 需要處理程序、GPU 處理影像輸出等不同。它的工作比較單一，就是圖像識別，可說是把 CPU 與 GPU 混合處理的工作獨立出來，成為一枚新核心。
@@ -132,7 +174,10 @@ Amazon 雲端服務支持的深度學習函式庫（圖片來源： AWS）
 * Github
 1. 參考:[[https://github.com/openvinotoolkit/openvino_notebooks][ openvinotoolkit / openvino_notebooks ]]
 2. Create and activate a Virtual Environment
-   #+begin_src shell -r -n :results output :exports both
+   #+begin_src shell -r  :results output :exports both
+   conda create --name ai4y python=3.7 --yes
+   conda activate ai4y
+
    conda create --name openvino_env
    conda activate openvino_env
    #+end_src
