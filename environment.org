@@ -36,6 +36,19 @@
 #+ATTR_HTML: :width 500
 [[file:images/step4.jpeg]]
 
+** 問題處理
+*** 系統找不到NCS2
+**** 狀況:程式執行過程出現以下錯誤訊息
+  #+begin_src shell -r -n :results output :exports both
+Cannot load library '/Users/username/intel//openvino_2019.3.334/deployment_tools/inference_engine/lib/intel64/libmyriadPlugin.dylib': dlopen(/Users/username/intel//openvino_2019.3.334/deployment_tools/inference_engine/lib/intel64/libmyriadPlugin.dylib, 1): Library not loaded: /usr/local/opt/libusb/lib/libusb-1.0.0.dylib
+  Referenced from: /Users/username/intel//openvino_2019.3.334/deployment_tools/inference_engine/lib/intel64/libmyriadPlugin.dylib
+  #+end_src
+**** 解決
+打開Terminal，輸入以下指令
+#+begin_src shell -r -n :results output :exports both
+brew install libusb
+#+end_src
+
 * 安裝套件
 1. 開啟終端機(Terminal / iTerm)
    #+CAPTION: Caption
