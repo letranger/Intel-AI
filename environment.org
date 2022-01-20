@@ -50,3 +50,7 @@
 conda activate ai4y
 conda install 套件名稱
 #+end_src
+例如：要安裝 sklearn
+#+begin_src shell -r -n :results output :exports both
+conda install -c intel scikit-learn
+#+end_src
