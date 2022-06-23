@@ -1,31 +1,76 @@
-#+TITLE: Install
+#+TITLE: Install openvino, NSC2
 
-1. Install cmake
-   - 東西在 NAS
-2. Add /Applications/CMake.app/Contents/bin to path (for default install)
-   edit .bashrc file,加入
-   #+begin_src shell -r -n :source /opt/anaconda3/etc/profile.d/conda.sh
-conda update -n base -c defaults conda
-conda create --name openvino_env
-conda activate openvino_env
-
-cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
-./install_prerequisites.sh
-
+* New student
+** Jamf remote command
+以brew安裝opencv
+#+begin_src shell -r -n :results output :exports both
+sudo chown -R student /usr/local
+sudo chown -R student /opt/intel
+#+end_src
+** Jamf policy 以student執行
+#+begin_src shell -r -n :results output :exports both
+brew install opencv
+brew install libusb
+pip3 install opencv-python
+pip3 install numpy
+pip3 install openvino
+#+end_src
+** 以student執行
+#+begin_src shell -r -n :results output :exports both
 python -m pip install --upgrade pip
-
+pip install openvino-dev
 
 cd ~/Desktop
 git clone https://github.com/openvinotoolkit/openvino_notebooks.git
 cd ~/Desktop/openvino_notebooks
 pip install -r requirements.txt
 
-
 conda install openvino-ie4py -c intel
-conda install -c anaconda ipykernel
-pip install ipykernel
-pip install matplotlib
-pip install opencv-python
+#+end_src
+** NCS2
+
+* 上次的做法
+1. Install cmake
+   - 東西在 NAS
+2. Add /Applications/CMake.app/Contents/bin to path (for default install)
+   edit .bashrc file,加入
+   #+begin_src shell -r -n :source /opt/anaconda3/etc/profile.d/conda.sh
+# update conda
+conda update -n base -c defaults conda
+python -m pip install --upgrade pip
+# create environment
+conda create --name Intel -y
+conda activate openvino_env
+
+pip install openvino-dev
+conda install Intel
+
+# 安裝 m_openvino_toolkit_p_2022.1.0.643_offline.dmg
+# 執行 bootstrapper
+cd /opt/intel/openvino_2022.1.0.643
+./setupvars.sh
+pip install openvino-dev tensorflow onnx
+
+# install requirement
+cd /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
+./install_prerequisites.sh
+
+
+# install requirement
+cd ~/Desktop
+git clone https://github.com/openvinotoolkit/openvino_notebooks.git
+cd ~/Desktop/openvino_notebooks
+pip install -r requirements.txt
+
+
+
+
+
+conda install openvino-ie4py -c intel -y
+conda install -c anaconda ipykernel -y
+pip install ipykernel -y
+pip install matplotlib -y
+pip install opencv-python -y
 cd /opt/anaconda3/lib/python3.8/site-packages
 cp -r /opt/intel/openvino_2021.4.689/python/python3.8/openvino .
 python -m ipykernel install --user --name openvino_env

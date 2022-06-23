@@ -1,14 +1,34 @@
 #+TITLE: 403教室使用說明
-#+OPTIONS: toc:nil
-# -*- org-export-babel-evaluate: nil -*-'
 #+TAGS: Intel, AI4Y
-#+OPTIONS: toc:1
-#+include: ../web.org
+#+OPTIONS: toc:2 ^:nil num:5
+#+PROPERTY: header-args :eval never-export
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
 
 * Mac OS教學
 - [[https://support.apple.com/zh-tw/HT201236][Mac 鍵盤快速鍵]]
-
+** 常用快速鍵
+- 複製: Command ⌘ - C
+- 貼上: Command ⌘ - V
+- 剪下: Command ⌘ - X
+- 放大: 貼上: Command ⌘ - +
+- 縮小: 貼上: Command ⌘ - -
+- 關閉程式: Command ⌘ - Q
+- 關閉視窗: Command ⌘ - W
+* Python開發環境
+** Jupyter Notebook
+- [[https://youtu.be/rkB4mNY33G0][開啟Jupyter Notebook方式1]]
+- [[https://youtu.be/WyU8LHSYVXE][開啟Jupyter Notebook方式2]]
+** Pycharm
+- [[https://youtu.be/PAXjLehvCPU][開啟PyCharm方式]]
 * OpenVINO開發環境
+** NCS2 Stick
+#+CAPTION: NCS2安裝方式
+#+LABEL:fig:Labl
+#+name: fig:Name
+#+ATTR_LATEX: :width 400
+#+ATTR_ORG: :width 400
+#+ATTR_HTML: :width 600
+[[file:images/CB5098EE-6C51-4B33-8275-010F8747AD0F.jpg]]
 ** Anaconda-Navigator
 1. 於Docker上開啟Anaconda-Navigator
    #+CAPTION: Caption
@@ -35,23 +55,26 @@
 #+ATTR_ORG: :width 300
 #+ATTR_HTML: :width 500
 [[file:images/step4.jpeg]]
-
-** 問題處理
-*** 系統找不到NCS2
-**** 狀況:程式執行過程出現以下錯誤訊息
-  #+begin_src shell -r -n :results output :exports both
-Cannot load library '/Users/username/intel//openvino_2019.3.334/deployment_tools/inference_engine/lib/intel64/libmyriadPlugin.dylib': dlopen(/Users/username/intel//openvino_2019.3.334/deployment_tools/inference_engine/lib/intel64/libmyriadPlugin.dylib, 1): Library not loaded: /usr/local/opt/libusb/lib/libusb-1.0.0.dylib
-  Referenced from: /Users/username/intel//openvino_2019.3.334/deployment_tools/inference_engine/lib/intel64/libmyriadPlugin.dylib
-  #+end_src
-**** 解決
-打開Terminal，輸入以下指令
-#+begin_src shell -r -n :results output :exports both
-brew install libusb
+* Python專案環境
+** 查詢現有環境
+#+begin_src shell -r :results output :exports both
+conda env list
 #+end_src
-
-* 安裝套件
+** 建立新環境
+#+begin_src shell -r -n :results output :exports both
+conda create --name ai4y python==3.7
+#+end_src
+** 啟用conda環境
+#+begin_src shell -r -n :results output :exports both
+conda activate ai4y
+#+end_src
+** 離開conda環境
+#+begin_src shell -r -n :results output :exports both
+conda deactivate
+#+end_src
+* 於Python安裝套件
 1. 開啟終端機(Terminal / iTerm)
-   #+CAPTION: Caption
+#+CAPTION: Caption
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 300
@@ -66,4 +89,34 @@ conda install 套件名稱
 例如：要安裝 sklearn
 #+begin_src shell -r -n :results output :exports both
 conda install -c intel scikit-learn
+#+end_src
+* Python學習資源
+- [[https://letranger.github.io/PythonCourse/PythonBasic.html][PythonBasic]]
+- [[https://letranger.github.io/PythonCourse/PythonAdvanced.html][PythonAdvanced]]
+* 問題處理
+** *MacOS系統* 找不到NCS2解決方案
+*** 重新插、拔NCS2 Stick
+*** 安裝USB系統套件
+打開Terminal，輸入以下指令
+#+begin_src shell -r -n :results output :exports both
+brew install libusb
+#+end_src
+** 重新建立conda openvino環境
+開啟終端機、貼上以下指令、WAIT
+#+begin_src shell -r :results output :exports both
+jupyter kernelspec uninstall openvino -y
+conda env remove -n openvino
+conda create -n openvino python=3.7 -y
+conda activate openvino
+pip3 install numpy==1.15
+pip3 uninstall mkl-service -y
+pip3 install mkl-service
+pip3 install  matplotlib
+conda install openvino-ie4py -c intel -y
+pip3 install opencv-python
+pip3 install openvino-dev
+conda install matplotlib -y
+conda install tensorflow -y
+conda install -c anaconda ipykernel -y
+python -m ipykernel install --user --name=openvino
 #+end_src
