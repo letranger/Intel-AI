@@ -28,7 +28,7 @@
 #+ATTR_LATEX: :width 400
 #+ATTR_ORG: :width 400
 #+ATTR_HTML: :width 600
-[[file:images/CB5098EE-6C51-4B33-8275-010F8747AD0F.jpg]]
+[[file:images/ncs2.jpg]]
 ** Anaconda-Navigator
 1. 於Docker上開啟Anaconda-Navigator
    #+CAPTION: Caption
