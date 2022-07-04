@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-24 Wed 11:03 -->
+<!-- 2022-07-01 Fri 12:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Install Open Vino on MacOS</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Yung Chin, Yen" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="author" content="Yung-Chin Yen" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +31,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +41,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -190,8 +191,7 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://letranger.github.io/org-html-themes/styles/purplereadtheorg/css/readtheorg.css"/>
@@ -199,66 +199,349 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.cacheClassElem = elem.className;
-         elem.cacheClassTarget = target.className;
-         target.className = "code-highlighted";
-         elem.className   = "code-highlighted";
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(elem.cacheClassElem)
-         elem.className = elem.cacheClassElem;
-       if(elem.cacheClassTarget)
-         target.className = elem.cacheClassTarget;
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Install Open Vino on MacOS</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3c51769">1. Github</a></li>
-<li><a href="#org78b2750">2. localhost</a></li>
-<li><a href="#org4cc5e06">3. Docker</a></li>
-<li><a href="#org6f5ca04">4. Uninstallation OpenVino on Mac</a></li>
+<li><a href="#org3dde669">1. zsh</a></li>
+<li><a href="#orga3e69c0">2. NCS2</a></li>
+<li><a href="#org118978f">3. DNN如何在不同系統進行最佳化</a></li>
+<li><a href="#org88e0218">4. IR</a></li>
+<li><a href="#org0efdbb3">5. Github</a></li>
+<li><a href="#org4bb9b3e">6. localhost</a></li>
+<li><a href="#orgc98510c">7. Docker</a></li>
+<li><a href="#org83c6437">8. Uninstallation OpenVino on Mac</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org3c51769" class="outline-2">
-<h2 id="org3c51769"><span class="section-number-2">1</span> Github</h2>
+<div id="outline-container-org3dde669" class="outline-2">
+<h2 id="org3dde669"><span class="section-number-2">1.</span> zsh</h2>
 <div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgac0edcc" class="outline-3">
+<h3 id="orgac0edcc"><span class="section-number-3">1.1.</span> install</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr"> 1: </span><span style="color: #c678dd;">cd</span> /Users/student
+<span class="linenr"> 2: </span><span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">PATH</span>=/usr/local/bin:$<span style="color: #dcaeea;">PATH</span>
+<span class="linenr"> 3: </span>brew install zsh zsh-completions
+<span class="linenr"> 4: </span>brew install zsh-syntax-highlighting
+<span class="linenr"> 5: </span><span style="color: #c678dd;">source</span> /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+<span class="linenr"> 6: </span>sh -c <span style="color: #98be65;">"$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"</span>
+<span class="linenr"> 7: </span>git clone --depth=<span style="color: #da8548; font-weight: bold;">1</span> https://github.com/romkatv/powerlevel10k.git ${<span style="color: #dcaeea;">ZSH_CUSTOM</span>:-$<span style="color: #dcaeea;">HOME</span>/.oh-my-zsh/custom}/themes/powerlevel10k
+<span class="linenr"> 8: </span>brew tap homebrew/cask-fonts
+<span class="linenr"> 9: </span>brew install font-meslo-for-powerline
+<span class="linenr">10: </span>git clone https://github.com/powerline/fonts.git --depth=<span style="color: #da8548; font-weight: bold;">1</span>
+<span class="linenr">11: </span><span style="color: #c678dd;">cd</span> fonts
+<span class="linenr">12: </span>./install.sh
+<span class="linenr">13: </span><span style="color: #c678dd;">cd</span> ..
+<span class="linenr">14: </span>rm -rf fonts
+<span class="linenr">15: </span>brew cleanup
+<span class="linenr">16: </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5f0b63a" class="outline-3">
+<h3 id="org5f0b63a"><span class="section-number-3">1.2.</span> .zshrc</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr"> 1: </span>
+<span class="linenr"> 2: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+<span class="linenr"> 3: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">!! Contents within this block are managed by 'conda init' !!</span>
+<span class="linenr"> 4: </span><span style="color: #dcaeea;">__conda_setup</span>=<span style="color: #98be65;">"$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2&gt; /dev/null)"</span>
+<span class="linenr"> 5: </span><span style="color: #51afef;">if</span> [ $<span style="color: #dcaeea;">?</span> -eq <span style="color: #da8548; font-weight: bold;">0</span> ]; <span style="color: #51afef;">then</span>
+<span class="linenr"> 6: </span>    <span style="color: #c678dd;">eval</span> <span style="color: #98be65;">"$__conda_setup"</span>
+<span class="linenr"> 7: </span><span style="color: #51afef;">else</span>
+<span class="linenr"> 8: </span>    <span style="color: #51afef;">if</span> [ -f <span style="color: #98be65;">"/opt/anaconda3/etc/profile.d/conda.sh"</span> ]; <span style="color: #51afef;">then</span>
+<span class="linenr"> 9: </span>        . <span style="color: #98be65;">"/opt/anaconda3/etc/profile.d/conda.sh"</span>
+<span class="linenr">10: </span>    <span style="color: #51afef;">else</span>
+<span class="linenr">11: </span>        <span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">PATH</span>=<span style="color: #98be65;">"/opt/anaconda3/bin:$PATH"</span>
+<span class="linenr">12: </span>    <span style="color: #51afef;">fi</span>
+<span class="linenr">13: </span><span style="color: #51afef;">fi</span>
+<span class="linenr">14: </span><span style="color: #c678dd;">unset</span> __conda_setup
+<span class="linenr">15: </span><span style="color: #5B6268;"># </span><span style="color: #5B6268;">&lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+<span class="linenr">16: </span><span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">TERM</span>=<span style="color: #98be65;">"xterm-256color"</span>
+<span class="linenr">17: </span><span style="color: #dcaeea;">ZSH_THEME</span>=<span style="color: #98be65;">"powerlevel10k/powerlevel10k"</span>
+<span class="linenr">18: </span><span style="color: #c678dd;">source</span> /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga3e69c0" class="outline-2">
+<h2 id="orga3e69c0"><span class="section-number-2">2.</span> NCS2</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+「VPU」乃 Movidius 對自家處理器的稱為，全稱為 Vision Processing Unit「視覺處理器」。它是一枚專注於處理影像分析的處理器，與 CPU 需要處理程序、GPU 處理影像輸出等不同。它的工作比較單一，就是圖像識別，可說是把 CPU 與 GPU 混合處理的工作獨立出來，成為一枚新核心。<br />
+</p>
+
+<p>
+這次 Google Project Tango 與 Movidius 合作的處理器名為「Myriad 2」（MA2450），屬於第二代的產品，由台積電 TSMC 利用 28 納米製程生產，擁有每秒 3 萬億次浮點運算能力，並能夠同時處理 6 個 60 frame Full HD 影像內容輸入，在純視覺處理方面可以輕鬆擊敗 Nvidia 的 Tegra，而且它的共享內存只有2MB，比很多處理器的都要小。<br />
+</p>
+
+<p>
+在圖像識別上，VPU 能夠做到追蹤動態物件、實物測距及深度學習環境，這三大功能算是補足了現時電腦缺乏或比較難做到的東西。<br />
+</p>
+
+<div id="org300144d" class="figure">
+<p><img src="images/vision-processing-unit-01.jpg" alt="vision-processing-unit-01.jpg" width="500" /><br />
+</p>
+<p><span class="figure-number">Figure 1: </span>Myraid 2 Vision Processor Unit (VPU)</p>
+</div>
+</div>
+
+<div id="outline-container-orgff9941a" class="outline-3">
+<h3 id="orgff9941a"><span class="section-number-3">2.1.</span> 具備追蹤與繞行能力的無人機</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+VPU 的使用場景很多，例如他們最近也跟 DJI 合作，推出一款名為 Phantom 4 的無人機，此機通過 VPU 提供了偵測功能，協助 Phantom 4 擁有自行繞開障礙物的能力。<br />
+</p>
+
+<p>
+不過，Movidius 的 VPU 也不是完全沒有對手，例如 Intel 的 Real Sense 技術便以具備相同運算能力為目標，並在 Yunnec 無人機 Typhoon H 上實現了 360 度偵測、追蹤動態物件、自動繞行等功能，實現我們一直認為不太可能做到的無人機拍攝功能。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0ab1e21" class="outline-3">
+<h3 id="org0ab1e21"><span class="section-number-3">2.2.</span> Intel 神經計算棒NCS2簡介</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+英特爾NCS 2由最新一代的英特爾VPU（視覺處理單元）支持–英特爾Movidius Myriad X VPU。這是第一個具有神經計算引擎的VPU，可提供額外的性能。諸如Caffe，Tensor Flow或MXNet之類的深度學習神經網絡可以與NCS2上的OpenVINO工具包集成。這些機器學習框架針對全新的深度神經網絡（DNN）推理引擎進行了優化，該引擎提供的性能是前一代的八倍。<br />
+</p>
+
+<p>
+借助電腦和Intel NCS2，開發人員可以啟動其AI和計算機視覺應用的開發，並在幾分鐘內執行。英特爾NCS2在標準USB 3.0上運行，不需要其他硬體，從而使用戶能夠無縫轉換由電腦訓練好的模型，然後將其部署到各種邊緣設備而不需連網或連雲。無論是開發智能相機，具有手勢識別功能的無人機，工業機器人，還是下一代智能家居設備，英特爾神經計算棒2都能為開發人員提供更快原型所需的功能。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org46f21f1" class="outline-3">
+<h3 id="org46f21f1"><span class="section-number-3">2.3.</span> 應用</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+因為能夠跑OpenVINO的硬體等級的CPU建議能在8核以上, 因為不是所有機器都有GPU, 所以只要在沒有GPU的機器上插入NCS2, 馬上就可以使用有GPU等級的演算法, 最常見的組合就是PC加NCS2或Resapberry Pi加NCS2。<br />
+</p>
+
+<p>
+試想一下,如果傳統的監控安防攝影機, 插了一支NCS2在上面, 就可以做人臉偵測, 物件辨識或車牌辨識, 是不是瞬間就把傳統的監控攝影機, 馬上變成了具AI功能的智慧安防攝影機, 這樣許多終端的設備, 就可以馬上從智障變成有智慧, 這不是挺完美的嗎？<br />
+</p>
+
+<p>
+這邊提供一個比較表, 原文如下,是用OpenVINO的toolkit執行MobileNet SSD時所做的比較, 可以看到NCS2比NCS1多了2.3個FPS,雖然不多, 但卻比樹莓派只用單顆CPU來跑MobileNet SSD時,多了整整8個FPS, 真的有達到加速的功能。<br />
+</p>
+
+
+<div id="orgca406ab" class="figure">
+<p><img src="https://ithelp.ithome.com.tw/upload/images/20190925/20118900PDmj3SE949.jpg" alt="20118900PDmj3SE949.jpg" /><br />
+</p>
+</div>
+
+
+<div id="orge129a43" class="figure">
+<p><img src="images/20118900PDmj3SE949.jpg" alt="20118900PDmj3SE949.jpg" width="500" /><br />
+</p>
+<p><span class="figure-number">Figure 2: </span>NCS2 performance</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org118978f" class="outline-2">
+<h2 id="org118978f"><span class="section-number-2">3.</span> DNN如何在不同系統進行最佳化</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+現形深度學習架構面臨的第一個問題則是如何在異質化的計算系統上做計算速度上的最佳化。<br />
+目前深度學習的架構相當多種，並各有其特色。但這樣百家爭鳴的情況，卻引發了如巴別塔危機的混亂狀況<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>。<br />
+</p>
+
+<p>
+當我們開始進入深度學習世界時，最常會想知道的就是，到底要挑選哪一種框架來入門？<br />
+</p>
+</div>
+<div id="outline-container-orgec4b27a" class="outline-3">
+<h3 id="orgec4b27a"><span class="section-number-3">3.1.</span> Frames</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+有如圖40-1和表格40-1顯示，目前在最大的開源社群Github上，可已找到20種星星數超過一千的深度學習框架，包含：TensorFlow、Keras、Caffe、PyTorch、CNTK、MXNet、DL4J、Theano、Torch7、Caffe2、Paddle、DSSTNE、tiny-dnn、Chainer、neon、ONNX、BigDL、DyNet、brainstorm、CoreML…等。<br />
+</p>
+
+<p>
+而排名第一的TensorFlow更有將近10萬個星星，可以得知，深度學習受到大家關注當選擇深度框架時，我們能從以下幾個面向來考慮，將分別介紹以下六個面向<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>。<br />
+</p>
+
+
+<div id="org56e395e" class="figure">
+<p><img src="images/DNNFrames.png" alt="DNNFrames.png" width="500" /><br />
+</p>
+<p><span class="figure-number">Figure 3: </span>常見深度學習框架（圖片來源：OmniXRI整理製作）</p>
+</div>
+
+<p>
+目前有三大陣營：<br />
+</p>
+
+<ul class="org-ul">
+<li>Keras：支援TensorFlow、Theano、MXNet、DL4J、CNTK，<br /></li>
+<li>微軟和Facebook聯盟推出ONNX：可支援Caffe2、CNTK、PyTorch<br /></li>
+<li>Google的TensorFlow：在 2015 年發表<br /></li>
+</ul>
+
+<p>
+另外，雖然框架之間可以轉換，但不代表轉換後的執行效率會和直接使用某個框架一樣好，此時只能依實際需求來取捨是否拿彈性換取效能<sup><a id="fnr.2.100" class="footref" href="#fn.2" role="doc-backlink">2</a></sup>。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0c0e9f1" class="outline-3">
+<h3 id="org0c0e9f1"><span class="section-number-3">3.2.</span> Frame的選擇</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+一般而言，深度學習架構的使用者可以粗略分為兩類<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup>：<br />
+</p>
+<ol class="org-ol">
+<li>一種是運用深度學習架構來進行概念驗證（Proof of Concept），因而需要快速實驗且評估不同的模型。<br /></li>
+<li>另一種則是希望將深度學習導入商業應用，將深度學習模型配置成應用程式（app），成為對一般民眾開放的服務平台。<br /></li>
+</ol>
+<p>
+然而，基於不同的使用需求，究竟該依何標準從不同的深度學習架構中選擇呢？<br />
+</p>
+
+<p>
+以研究為取向的使用者，對於深度學習架構的需求，最重要的考量即是快速上手，且容易除錯。透過可動態執行的直譯式語言，在嘗試或開發早期時，便可及早發現模型裡的臭蟲，避免浪費大量時間訓練一個錯誤的模型。因此，現行深度學習架構的一個共同處，即是支持一或多種直譯式語言的呼叫介面。其中，鑑於 Python 是目前最熱門的一個程式語言，在目前許多比較深度學習架構的部落格文章中，無論是由第三方公司所評比，或是部落客個人的努力，多將深度學習架構中是否包含 Python 的客戶端呼叫介面（Client Interface），視為一個加分條件。在這樣的考量，似乎在架構設計上，以動態計算圖（dynamic graph）為主要網路資料結構的 PyTorch 為最佳考量。<br />
+</p>
+
+<p>
+Keras 是一個深度學習的介面函式庫（API），而非深度學習架構。在早期，Keras 只有專注於開發建構在 Theano 上的高階 API 為主。以物件導向的方式，將建模的程式碼封裝成 layer，而利用堆疊一層一層的 Layer 物件來建立類神經模型，或又稱為 Layer-wise 為主的方式來建模。在 Tensorflow 發表後，人氣相當高的 Keras  便進而採用 Tensorflow 作為執行後端（backend），但在不同的深度學習的架構逐漸蓬勃發展後，又併入 Microsoft 的 CNLK，而成為一個通用化的深度學習介面。<br />
+Keras 作為一個深度學習架構的最上層，就如 Thomas 所言，將後端的原始碼封裝，使用者在建構類神經網路模型時，只需簡短的幾行程式碼便可完成，因此達到建模的簡易性。然而以 Layer-wise 為主的的建模方式通常缺乏彈性，在較為複雜的類神經網路，仍需要親自撰寫後端的原始碼，或甚至打破 Layer 的架構，重新編寫計算圖中的運算元。不過 Keras 所提供的便利性，對於許多深度學習入門者而言是非常寶貴的踏腳石，那些複雜的網路架構，如 MAC network (Hudson and Manning, ICLR 2018)，或 Capsule Network 就留給那些天才般的腦袋吧！<br />
+</p>
+
+<p>
+和 PyTorch 都在去年發表的，還有 Amazon 和 Microsoft 共同合作的開源專案，以 python 為主的 Gluon API。Amazon 的雲端服務使用的深度學習架構 MXNet 和 Microsoft 的 Cognitive Toolkit 都會使用 Gluon API 介面，不過目前還是以支援 MXNet 為主。<br />
+MXNet，由著名的開源專案搖籃 Apache 基金會所培育，亦是由多個開源專案演化而來，在 2015 年正式發表。除了 Gluon API 外，MXNet 更提供高度優化的 R 介面。如同 PyTorch 所標榜的，Gluon 也是使用所謂的動態計算圖，使用者無需再建模的時候，就先把計算圖建立好，反而透過如同錄影的方式，一步一步的執行，讓使用者在對梯度除錯時更加的容易。但同時，Gluon 也容許使用者，建立抽象式的符號計算圖，藉著事先優化已編譯好的深度網路架構，在執行速度上比動態計算圖更為快速。<br />
+Amazon 雲端服務支持的深度學習函式庫（圖片來源： AWS）<br />
+</p>
+
+<p>
+未來深度學習架構發展的趨勢，目前有兩個重要的走向備受到關注：<br />
+之一，是計算能力的提升。即使有良好的軟體設計框架來設計日漸複雜的類神經網路模型，缺乏強大的硬體計算能力，過於複雜的網路模型，只是精工雕琢，具有複雜紋路的美麗雕刻，卻不具有任何實際效用。 GPU 加入高效能運算的硬體計算行列，成為深度學習研究的加速器。然而雖然加快了執行速度（performance），但也提高了維持高效能計算在異質化系統執行的難處，於是乎，除了在硬體上力求革命性的突破，一個針對異質化設備做運算最佳化的編譯器，更顯重要。<br />
+之二，則是模型在不同架構間的交換檔案格式。鑑於，深度學習的相關函式庫與架構日漸蓬勃發展，顯然地，一個受各方認可的檔案交換格式制定，將會有利於以建構的深度類神經網路模型在不同的架構中使用，有利於重製模型成果以及比較各個架構的速度和實踐細節。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org47f417c" class="outline-3">
+<h3 id="org47f417c"><span class="section-number-3">3.3.</span> 巴別塔危機</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+由於影像模型因為訓練不易或其受限於計算平台的硬體架構，所以經常需要使用他人以訓練好的類神經網路模型，在其上層加入自己的分類器層，以 transfer learning 的方式來完成任務。雖然感謝共享模型的普遍，然而因為模型的建置架構不同，再加上許多即使輸出權重，也因為使用高階 API，以物件導向方式建構的模型黑箱化，所以在從硬碟讀入權重時，通常會發生許多問題。<br />
+</p>
+
+<p>
+為了解決這個問題，於是出現了 Open Nueral Network Exchange （ONNX）開源類神經網路模型交換格式這個計畫。目前參與這個計畫的 Facebook，Microsoft 和台灣的深耕編譯器與虛擬機器的 skymizer 公司等。但，很不幸地，Google 並不在其中的名單中。雖然 Google 並不對 ONNX 做直接支援，但還是有熱心的編程者寫了 Tensorflow 到 ONNX 格式的轉換程式碼。<br />
+<a href="https://ithelp.ithome.com.tw/articles/10209319">ONNX實作DEMO</a><br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org88e0218" class="outline-2">
+<h2 id="org88e0218"><span class="section-number-2">4.</span> IR</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+中介碼（IR，intermediate representation）是一種資料結構，可將輸入的資料建構為一個電腦程式，也可以將一部份或是所有輸出的程式反推回輸入資料。這意味著中介碼將會保留一些輸入資料的資訊，同時擁有更進一步註釋或是快速查詢的功能<sup><a id="fnr.4" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>。<br />
+</p>
+
+<p>
+舉一個典型的例子，它是現代許多編譯器所擁有的功能，它可將一段程式轉換成一個中間層的Graph資料結構，Graph可進行數據流分析，而且可在建立實際運行的CPU指令列表之前進行重組（re-arrangement），這種中間層的使用方式，允許像是LLVM的編譯系統可以同時擁有許多不同的前端語言編譯器，而且可以產生許多不同架構系統的機器碼<sup><a id="fnr.4.100" class="footref" href="#fn.4" role="doc-backlink">4</a></sup>。<br />
+</p>
+</div>
+
+<div id="outline-container-orgeb630ae" class="outline-3">
+<h3 id="orgeb630ae"><span class="section-number-3">4.1.</span> Interpreter v.s. compiler</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>所謂的編譯，是指原始的程式碼 (source code) 會經由編譯器 (compiler) 轉換成目的碼 (object code) 後，再由連結器 (linker) 轉換成可執行的二進位碼，使用編譯器的語言稱為編譯式語言，C 和 C++ 就是編譯式語言的代表作。以及像是 C# , LISP, Pascal, VB, Delphi 等需要編譯器才能轉換成可執行碼 (executable code) 的語言。編譯式語言多半會是靜態語言 (static language)，它們擁有事先定義的型別，型別檢查 (type check) 與高效能的執行速度等特性。<br /></li>
+<li><p>
+所謂的直譯，是指原始的程式碼只要經過直譯器 (Interpreter) 即可轉換成可執行碼，由於它們不需要經由編譯器，而是在執行時才會將原始碼直譯成執行碼，所以速度上會比編譯與連結器產生的執行碼要慢，效能會有一部份取決於直譯器的速度，而直譯式語言多半以動態語言 (dynamic language) 為主，具有靈活的型別處理 (鬆散型別)，動態生成與程式彈性，但速度會比編譯式的要慢一些，像是 JavaScript, Python, Ruby, PHP, ASP 等等，都是直譯式語言。<br />
+</p>
+
+<p>
+使用編譯式語言產生的程式幾乎都是可獨立執行的，因為它們都是由Compiler進行型別／語意等檢查，以及經過連結器的處理，程式碼幾乎可以直接存取系統服務 (system service) 與 APIs，所以執行效率會特別好；直譯式語言則是必須依賴一個執行環境 (execution context)，語言可用的功能由這個執行環境提供，例如 JavaScript 只能使用瀏覽器提供的功能，而 PHP 只能使用 php.exe 實作的功能一樣，它們無法獨立執行 (或是看起來像獨立，實際上卻是系統自動在背後建立執行環境，如 HTML Application)。<br />
+</p></li>
+</ul>
+
+<p>
+.NET Framework 本身的語言則是包含兩種成份 (Java 也是)，一開始 .NET Framework 內的編譯器 (csc.exe, vbc.exe) 是扮演編譯器的角色，它會將程式編譯成中介碼 (Intermediate Code, Java 則是bytecode)，而在執行時，由 CLR (JVM) 進行即時編譯 (JIT Compilation)，將中介碼轉換成機器碼 (Machine code)，才可以在作業平台上執行，所以 CLR (JVM) 扮演的是直譯器的角色，而其執行環境則是整個作業系統，它亦有編譯式語言的特性，但速度會比純種的編譯式語言 (C/C++) 要慢一些，原因是在 JIT Compilation 在第一次執行時會啟動，以將程式轉成機器碼，而純種的編譯式語言則在編譯連結完成時就已經是機器碼，故不需要 JIT 處理。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdcec8e3" class="outline-3">
+<h3 id="orgdcec8e3"><span class="section-number-3">4.2.</span> DNN系統架構</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+一個深度學習架構通常包含了以下架構：<br />
+</p>
+<p width="500">
+<img src="images/DLS.png" alt="DLS.png" width="500" /><br />
+在上圖中，我們可以看到粗略分為屬於軟題相關的如，使用者 API（User API），執行系統單元（System components）和於硬體相關（computer architecture）。使用者 API，包含如何實作類神經網路運算元，學習演算法以及梯度數值運算的部分。在使用者 API 之上，則是包括了如 Keras 更為抽象的 API。<br />
+</p>
+
+<p>
+使用者 API 的實作方式，目前深度學習架構的趨勢則是利用計算圖的方法來作為資料結構。而計算圖的設計方式，則使深度學習的架構朝向兩個不同的方向發展：一個是以 PyTorch 為主的動態計算圖，另一個則是以 Tensorflow 為主的靜態計算圖。<br />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5fd8a16" class="outline-3">
+<h3 id="org5fd8a16"><span class="section-number-3">4.3.</span> 計算圖</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+計算圖的發展，可以追朔到三十多年前的一個創新主意，那就是針對類神經網路或機械學習演算法所發展的自動梯度計算方式（Automatic Differentiation）。類神經網路的訓練，依賴兩個步驟：<br />
+</p>
+<ol class="org-ol">
+<li>第一個步驟是正向傳播（feed forward），就是將訓練資料餵送給類神經網路，藉著往上攀爬類神經網路內，層層疊起的網路結構，最後到達最上層的輸出神經元。<br /></li>
+<li>第二個步驟則是反向傳播（back propagation），將類神經網路最上層的輸出，與正確的分類標籤或數值代入損失函數後，計算出的誤差值，需要再次由上而下，對各層參數取偏微分計算，以計算該層參數對誤差的個別貢獻後，再往下回溯深不可測的層層堆疊網絡，透過連鎖規則（chain rule），更新每一層的權重和偏移參數值。<br /></li>
+</ol>
+
+<p>
+然而，正向或反向的傳播計算，所仰賴的是一個相當基礎的微分技巧，chain rule 來執行。而計算圖，則是將正向傳播的計算順序，以一個有方向的圖來表示。在計算圖中，每一個節點都是一個運算元，或代表資料的張量（tensor）。節點與節點之間，具有方向的連結，則是運算元執行的順序。下圖就是一個非常簡單的計算圖。<br />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0efdbb3" class="outline-2">
+<h2 id="org0efdbb3"><span class="section-number-2">5.</span> Github</h2>
+<div class="outline-text-2" id="text-5">
 <ol class="org-ol">
 <li>參考:<a href="https://github.com/openvinotoolkit/openvino_notebooks"> openvinotoolkit / openvino_notebooks </a><br /></li>
 <li><p>
 Create and activate a Virtual Environment<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   conda create --name openvino_env
-<span class="linenr">2: </span>   conda activate openvino_env
+<pre class="src src-shell">   conda create --name ai4y <span style="color: #dcaeea;">python</span>=<span style="color: #da8548; font-weight: bold;">3.7</span> --yes
+   conda activate ai4y
+
+   conda create --name openvino_env
+   conda activate openvino_env
 </pre>
 </div></li>
 <li><p>
 Clone the Repository<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">cd</span> ~/Desktop
-<span class="linenr">2: </span>   <span style="color: #ECBE7B;">git</span> clone https://github.com/openvinotoolkit/openvino_notebooks.git
-<span class="linenr">3: </span>   <span style="color: #ECBE7B;">cd</span> ~/Desktop/openvino_notebooks
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">cd</span> ~/Desktop
+<span class="linenr">2: </span>   git clone https://github.com/openvinotoolkit/openvino_notebooks.git
+<span class="linenr">3: </span>   <span style="color: #c678dd;">cd</span> ~/Desktop/openvino_notebooks
 </pre>
 </div></li>
 <li><p>
@@ -274,13 +557,13 @@ Install the Packages<br />
 </p>
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr"> 1: </span>   Collecting <span style="color: #dcaeea;">openvino</span>==2021.4.0
-<span class="linenr"> 2: </span>     Using cached openvino-2021.4.0-3839-cp39-cp39-macosx_10_15_x86_64.whl <span style="color: #51afef;">(</span><span style="color: #da8548; font-weight: bold;">25.8</span> MB<span style="color: #51afef;">)</span>
-<span class="linenr"> 3: </span>   ERROR: Cannot install openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span>==2021.4.0, openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span>==2021.4.1 and openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span>==2021.4.2 because these package versions have conflicting dependencies.
+<span class="linenr"> 2: </span>     Using cached openvino-2021.4.0-3839-cp39-cp39-macosx_10_15_x86_64.whl (<span style="color: #da8548; font-weight: bold;">25.8</span> MB)
+<span class="linenr"> 3: </span>   ERROR: Cannot install openvino-dev[onnx,tensorflow2]==2021.4.0, openvino-dev[onnx,tensorflow2]==2021.4.1 and openvino-dev[onnx,tensorflow2]==2021.4.2 because these package versions have conflicting dependencies.
 <span class="linenr"> 4: </span>
 <span class="linenr"> 5: </span>   The conflict is caused by:
-<span class="linenr"> 6: </span>       openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span> 2021.4.2 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
-<span class="linenr"> 7: </span>       openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span> 2021.4.1 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
-<span class="linenr"> 8: </span>       openvino-dev<span style="color: #51afef;">[</span>onnx,tensorflow2<span style="color: #51afef;">]</span> 2021.4.0 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
+<span class="linenr"> 6: </span>       openvino-dev[onnx,tensorflow2] 2021.4.2 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
+<span class="linenr"> 7: </span>       openvino-dev[onnx,tensorflow2] 2021.4.1 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
+<span class="linenr"> 8: </span>       openvino-dev[onnx,tensorflow2] 2021.4.0 depends on <span style="color: #dcaeea;">tensorflow</span>~=2.4.1; <span style="color: #dcaeea;">extra</span> == <span style="color: #98be65;">"tensorflow2"</span>
 <span class="linenr"> 9: </span>
 <span class="linenr">10: </span>   To fix this you could try to:
 <span class="linenr">11: </span>   <span style="color: #da8548; font-weight: bold;">1.</span> loosen the range of package versions you<span style="color: #98be65;">'ve specified</span>
@@ -325,13 +608,13 @@ In Jupyter Lab, select a notebook from the file browser using the left sidebar. 
 </ol>
 </div>
 
-<div id="outline-container-org334c508" class="outline-3">
-<h3 id="org334c508"><span class="section-number-3">1.1</span> conda基本語法</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-org8425a1d" class="outline-3">
+<h3 id="org8425a1d"><span class="section-number-3">5.1.</span> conda基本語法</h3>
+<div class="outline-text-3" id="text-5-1">
 </div>
-<div id="outline-container-org5408127" class="outline-4">
-<h4 id="org5408127"><span class="section-number-4">1.1.1</span> 檢查目前環境</h4>
-<div class="outline-text-4" id="text-1-1-1">
+<div id="outline-container-org2820bad" class="outline-4">
+<h4 id="org2820bad"><span class="section-number-4">5.1.1.</span> 檢查目前環境</h4>
+<div class="outline-text-4" id="text-5-1-1">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>conda env list
 </pre>
@@ -347,9 +630,9 @@ myEnv                    /Users/letranger/opt/anaconda3/envs/myEnv
 </pre>
 </div>
 </div>
-<div id="outline-container-org3a72815" class="outline-4">
-<h4 id="org3a72815"><span class="section-number-4">1.1.2</span> 建立新環境</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-org1cf8dfb" class="outline-4">
+<h4 id="org1cf8dfb"><span class="section-number-4">5.1.2.</span> 建立新環境</h4>
+<div class="outline-text-4" id="text-5-1-2">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>conda create --name myEnv <span style="color: #dcaeea;">python</span>=<span style="color: #da8548; font-weight: bold;">3.7</span>
 </pre>
@@ -362,9 +645,9 @@ Remove existing environment (y/[n])?
 </div>
 </div>
 
-<div id="outline-container-org7e2afb0" class="outline-4">
-<h4 id="org7e2afb0"><span class="section-number-4">1.1.3</span> 啟動虛擬環境</h4>
-<div class="outline-text-4" id="text-1-1-3">
+<div id="outline-container-org4eef539" class="outline-4">
+<h4 id="org4eef539"><span class="section-number-4">5.1.3.</span> 啟動虛擬環境</h4>
+<div class="outline-text-4" id="text-5-1-3">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>activate myEnv
 </pre>
@@ -372,9 +655,9 @@ Remove existing environment (y/[n])?
 </div>
 </div>
 
-<div id="outline-container-org1578f35" class="outline-4">
-<h4 id="org1578f35"><span class="section-number-4">1.1.4</span> 刪除虛擬環境</h4>
-<div class="outline-text-4" id="text-1-1-4">
+<div id="outline-container-org38f64d8" class="outline-4">
+<h4 id="org38f64d8"><span class="section-number-4">5.1.4.</span> 刪除虛擬環境</h4>
+<div class="outline-text-4" id="text-5-1-4">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>conda remove --name myEnv
 </pre>
@@ -384,9 +667,9 @@ Remove existing environment (y/[n])?
 </div>
 </div>
 
-<div id="outline-container-org78b2750" class="outline-2">
-<h2 id="org78b2750"><span class="section-number-2">2</span> localhost</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org4bb9b3e" class="outline-2">
+<h2 id="org4bb9b3e"><span class="section-number-2">6.</span> localhost</h2>
+<div class="outline-text-2" id="text-6">
 <ol class="org-ol">
 <li>Install cmake<br />
 <ul class="org-ul">
@@ -397,7 +680,7 @@ Add /Applications/CMake.app/Contents/bin to path (for default install)<br />
 edit .bashrc file,加入<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">PATH</span>=<span style="color: #98be65;">"/Applications/CMake.app/Contents/bin:</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">PATH</span><span style="color: #98be65;">"</span>
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">PATH</span>=<span style="color: #98be65;">"/Applications/CMake.app/Contents/bin:$PATH"</span>
 </pre>
 </div></li>
 <li>Install openvino tool kit<br />
@@ -416,22 +699,22 @@ vi ~/.bash_profile<br />
 Configure the Model Optimizer¶<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">cd</span> /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
-<span class="linenr">2: </span>   <span style="color: #ECBE7B;">sudo</span> ./install_prerequisites.sh
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">cd</span> /opt/intel/openvino_2021/deployment_tools/model_optimizer/install_prerequisites
+<span class="linenr">2: </span>   sudo ./install_prerequisites.sh
 </pre>
 </div></li>
 <li><p>
 Upgrade PyYAML<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">sudo</span> -H pip3 install --ignore-installed PyYAML
+<pre class="src src-shell"><span class="linenr">1: </span>   sudo -H pip3 install --ignore-installed PyYAML
 </pre>
 </div></li>
 <li><p>
 Testing<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #ECBE7B;">cd</span> /opt/intel/openvino_2021/deployment_tools/demo
+<pre class="src src-shell"><span class="linenr">1: </span>   <span style="color: #c678dd;">cd</span> /opt/intel/openvino_2021/deployment_tools/demo
 <span class="linenr">2: </span>   sh demo_benchmark_app.sh
 <span class="linenr">3: </span>   sh demo_security_barrier_camera.sh
 <span class="linenr">4: </span>   sh demo_squeezenet_download_convert_run.sh
@@ -458,39 +741,39 @@ Successfully installed numpy-1.21.4 opencv-python-4.5.4.58
 copy openvino to site_package<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span><span style="color: #ECBE7B;">cd</span> /Users/letranger/opt/anaconda3/lib/python3.8/site-packages
-<span class="linenr">2: </span><span style="color: #ECBE7B;">cp</span> -r /opt/intel/openvino_2021.4.689/python/python3.8/openvino .
+<pre class="src src-shell"><span class="linenr">1: </span><span style="color: #c678dd;">cd</span> /Users/letranger/opt/anaconda3/lib/python3.8/site-packages
+<span class="linenr">2: </span>cp -r /opt/intel/openvino_2021.4.689/python/python3.8/openvino .
 </pre>
 </div></li>
 </ol>
 </div>
 </div>
 
-<div id="outline-container-org4cc5e06" class="outline-2">
-<h2 id="org4cc5e06"><span class="section-number-2">3</span> Docker</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgc98510c" class="outline-2">
+<h2 id="orgc98510c"><span class="section-number-2">7.</span> Docker</h2>
+<div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-orgec8326d" class="outline-3">
-<h3 id="orgec8326d"><span class="section-number-3">3.1</span> Introduction</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-orgff6d74d" class="outline-3">
+<h3 id="orgff6d74d"><span class="section-number-3">7.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-7-1">
 <ul class="org-ul">
 <li>一般大家買來的電腦上大部份都是安裝微軟的Windows作業系統，如果遇到要開發Liunx相關應用程式時，可能有人會選擇安裝二個作業系統，在重新開機時選擇要執行那一種。雖然這種方式可完全掌控硬體資源（如CPU, GPU, HDD, RAM）及開發環境（相依套件、函式庫），但每次切換作業系統都要重新開機，實在太麻煩。<br /></li>
 <li>為解決這個問題，於是就有人提出在主作業系統(Host OS)上安裝一個虛擬機(Virtual Machine, VM)監視器(Hypervisor)，如VMWare, VirtualBox這類工具，方便安裝其它作業系統或者多種不同的開發環境，如Fig. 1左圖所示。雖然這樣很方便同時使用兩種以上作業環境，但硬體資源要和主系統共享且額外多了一些虛擬化轉換工作，所以執行效能較差，甚至有些硬體（如GPU）無法直接使用，導致部份應用程式無法運作。<br /></li>
 <li>很多在Linux環境下開發程式的人都知道，它的應用程式比較不像在Windows下一個執行檔(.exe)或搭配幾個動態函式庫(.dll)就能順利執行，各種開發工具及相依套件包常會有版本不相容問題。本來在Linux上也可以執行虛擬機(VM)來區隔不同開發環境，但效能實在太差，所以便有人開發出以一種類似大船載送貨櫃，貨櫃裝載各種不同大小、形狀貨物的執行環境，稱為Docker。<br /></li>
-<li>如圖<a href="#org9c6c8b6">1</a>所示，容器(Containers)就像貨櫃是用來裝載映像檔(Images)這樣的貨物，再由Docker引擎（大船承載）執行的概念。表面上看起來和VM沒什麼不同，但最大差別就是它很輕量，不透過虛擬化，直接驅動硬體資源，共用作業系統資源，所以啟用一個容器和映像檔僅須數秒和載入一個VM客作業系統核心要數分鐘差異頗大。以往Docker只能在Linux上運作，近年來已有支援Window及Mac OS的版本出現了。<br /></li>
-<li>一般Docker使用上極為方便，供應商僅需將欲提供的映像檔(Images)推上(Push) 公開映像檔倉儲(Repository / Docker Hub)，使用者再去拉下(Pull)想要的映像檔即可執行，如圖<a href="#org9c6c8b6">1</a>右圖所示。<br /></li>
+<li>如圖<a href="#org59d23f4">4</a>所示，容器(Containers)就像貨櫃是用來裝載映像檔(Images)這樣的貨物，再由Docker引擎（大船承載）執行的概念。表面上看起來和VM沒什麼不同，但最大差別就是它很輕量，不透過虛擬化，直接驅動硬體資源，共用作業系統資源，所以啟用一個容器和映像檔僅須數秒和載入一個VM客作業系統核心要數分鐘差異頗大。以往Docker只能在Linux上運作，近年來已有支援Window及Mac OS的版本出現了。<br /></li>
+<li>一般Docker使用上極為方便，供應商僅需將欲提供的映像檔(Images)推上(Push) 公開映像檔倉儲(Repository / Docker Hub)，使用者再去拉下(Pull)想要的映像檔即可執行，如圖<a href="#org59d23f4">4</a>右圖所示。<br /></li>
 </ul>
 
-<div id="org9c6c8b6" class="figure">
+<div id="org59d23f4" class="figure">
 <p><img src="images/OpenVINO_Docker_1.jpg" alt="OpenVINO_Docker_1.jpg" width="500" /><br />
 </p>
-<p><span class="figure-number">Figure 1: </span>VM和Docker架構差異比較圖。(OmniXRI, Jan. 2021整理製作)</p>
+<p><span class="figure-number">Figure 4: </span>VM和Docker架構差異比較圖。(OmniXRI, Jan. 2021整理製作)</p>
 </div>
 </div>
 </div>
-<div id="outline-container-org91133f0" class="outline-3">
-<h3 id="org91133f0"><span class="section-number-3">3.2</span> Install Docker</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-orgc29e560" class="outline-3">
+<h3 id="orgc29e560"><span class="section-number-3">7.2.</span> Install Docker</h3>
+<div class="outline-text-3" id="text-7-2">
 <ol class="org-ol">
 <li><p>
 Install Docker on Mac<br />
@@ -500,7 +783,7 @@ Install Docker on Mac<br />
 </pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="orgd1835ca">
    ==&gt; Downloading https://desktop.docker.com/mac/main/amd64/70708/Docker.dmg
    ==&gt; Installing Cask docker
    ==&gt; Moving App 'Docker.app' to '/Applications/Docker.app'
@@ -517,9 +800,9 @@ Install Docker on Mac<br />
 </ol>
 </div>
 </div>
-<div id="outline-container-orgdc0f154" class="outline-3">
-<h3 id="orgdc0f154"><span class="section-number-3">3.3</span> Testing Docker</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org4b5db80" class="outline-3">
+<h3 id="org4b5db80"><span class="section-number-3">7.3.</span> Testing Docker</h3>
+<div class="outline-text-3" id="text-7-3">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>docker run hello-world
 </pre>
@@ -529,18 +812,18 @@ Install Docker on Mac<br />
 </p>
 </div>
 </div>
-<div id="outline-container-orgdf6e66a" class="outline-3">
-<h3 id="orgdf6e66a"><span class="section-number-3">3.4</span> 使用 Docker 安裝 OpenVINO</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org47373b2" class="outline-3">
+<h3 id="org47373b2"><span class="section-number-3">7.4.</span> 使用 Docker 安裝 OpenVINO</h3>
+<div class="outline-text-3" id="text-7-4">
 <ul class="org-ul">
 <li>Intel OpenVINO 對應不同操作系統(Windows, Linux, macOS, RaspbianOS)提供很多種安裝方式。近年來隨著各種容器技術興起，也開始支持像 Docker 這類直接安裝映像方式，充份解決用戶不熟悉安裝步驟及滿足開發者需要不同版本或開發環境隔離需求。<br /></li>
 <li>Intel OpenVINO 目前在 Docker Hub 上提供了多個映像讓使用者下載(pull)，其中有兩組使用率較高，openvino/workbench 用戶不需編程，直接操作圖型化接口就可測試各種模型的效率，openvino/ubuntu18_dev 則提供一般 Ubuntu 18.04 (Linux) 開發環境。<br /></li>
 <li>首先執行下列指令將映像文件 openvino/ubuntu18_dev 從 Docker Hub 拉下（下載）至本機端。由於文件數量較多且較大（解壓縮後約 7.22GByte），所以根據網絡速度可能需要等待數分鐘到數十分鍾不等。<br /></li>
 </ul>
 </div>
-<div id="outline-container-org91966b5" class="outline-4">
-<h4 id="org91966b5"><span class="section-number-4">3.4.1</span> 下載、執行image</h4>
-<div class="outline-text-4" id="text-3-4-1">
+<div id="outline-container-org1b18d91" class="outline-4">
+<h4 id="org1b18d91"><span class="section-number-4">7.4.1.</span> 下載、執行image</h4>
+<div class="outline-text-4" id="text-7-4-1">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>docker pull openvino/ubuntu18_dev
 </pre>
@@ -579,9 +862,9 @@ Install Docker on Mac<br />
 </div>
 </div>
 </div>
-<div id="outline-container-org6c4b152" class="outline-3">
-<h3 id="org6c4b152"><span class="section-number-3">3.5</span> Docker常用指令</h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-org49334c2" class="outline-3">
+<h3 id="org49334c2"><span class="section-number-3">7.5.</span> Docker常用指令</h3>
+<div class="outline-text-3" id="text-7-5">
 <ul class="org-ul">
 <li><p>
 docker info<br />
@@ -591,7 +874,7 @@ docker info<br />
 </pre>
 </div>
 
-<pre class="example">
+<pre class="example" id="org8074240">
   Client:
    Context:    default
    Debug Mode: false
@@ -728,7 +1011,7 @@ docker rm [Container DI]<br />
 刪除Container<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>  docker <span style="color: #ECBE7B;">rm</span> 7ce134ba2f64
+<pre class="src src-shell"><span class="linenr">1: </span>  docker rm 7ce134ba2f64
 <span class="linenr">2: </span>  docker ps -a
 </pre>
 </div>
@@ -747,7 +1030,7 @@ docker container ls<br />
 List containers<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>  docker container <span style="color: #ECBE7B;">ls</span>
+<pre class="src src-shell"><span class="linenr">1: </span>  docker container ls
 </pre>
 </div>
 
@@ -760,9 +1043,9 @@ CONTAINER ID   IMAGE                   COMMAND       CREATED       STATUS       
 </ul>
 </div>
 </div>
-<div id="outline-container-org3d89337" class="outline-3">
-<h3 id="org3d89337"><span class="section-number-3">3.6</span> 利用公開模型 MobileNet 執行圖像分類</h3>
-<div class="outline-text-3" id="text-3-6">
+<div id="outline-container-orgb2f9b18" class="outline-3">
+<h3 id="orgb2f9b18"><span class="section-number-3">7.6.</span> 利用公開模型 MobileNet 執行圖像分類</h3>
+<div class="outline-text-3" id="text-7-6">
 <p>
 利用 Docker 安裝好OpenVINO 工作環境後就可以開始進行推理(Inference)工作了。OpenVINO 除了提供多種預訓練好的模型外[11]，另外也支持很多不同框架 (Caffe/Caffe2, PyTorch, TensorFlow, MXNet, ONNX 等)產生的公開模型[12]，也稱為「Open Model Zoo」，其中包含圖像分類、對象偵測、圖像分割、人臉識別、人體 姿態、深度估測、圖像填補、風格轉移、動作識別、圖像著色、聲音分類、語音 識別、圖像翻譯等公開模型。<br />
 </p>
@@ -772,13 +1055,13 @@ CONTAINER ID   IMAGE                   COMMAND       CREATED       STATUS       
 </p>
 </div>
 </div>
-<div id="outline-container-orge45d0ff" class="outline-3">
-<h3 id="orge45d0ff"><span class="section-number-3">3.7</span> mobilenet 圖像分類</h3>
-<div class="outline-text-3" id="text-3-7">
+<div id="outline-container-orga8223fd" class="outline-3">
+<h3 id="orga8223fd"><span class="section-number-3">7.7.</span> mobilenet 圖像分類</h3>
+<div class="outline-text-3" id="text-7-7">
 </div>
-<div id="outline-container-org14f5b6d" class="outline-4">
-<h4 id="org14f5b6d"><span class="section-number-4">3.7.1</span> 下載openvion docker image</h4>
-<div class="outline-text-4" id="text-3-7-1">
+<div id="outline-container-orga121437" class="outline-4">
+<h4 id="orga121437"><span class="section-number-4">7.7.1.</span> 下載openvion docker image</h4>
+<div class="outline-text-4" id="text-7-7-1">
 <p>
 啟動 Docker 並指定映像在 Intel CPU 上執行，以 root 身份執行，同時指令顯示器和系統共享，方便 OpenCV 執行imshow()能正常工作<br />
 </p>
@@ -788,18 +1071,18 @@ CONTAINER ID   IMAGE                   COMMAND       CREATED       STATUS       
 </div>
 </div>
 </div>
-<div id="outline-container-orgef92da3" class="outline-4">
-<h4 id="orgef92da3"><span class="section-number-4">3.7.2</span> 下載模型</h4>
-<div class="outline-text-4" id="text-3-7-2">
+<div id="outline-container-org4ddb8a6" class="outline-4">
+<h4 id="org4ddb8a6"><span class="section-number-4">7.7.2.</span> 下載模型</h4>
+<div class="outline-text-4" id="text-7-7-2">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>python3 /opt/intel/openvino/deployment_tools/tools/model_downloader/downloader.py --name mobilenet-v1-1.0-224
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org94481a5" class="outline-4">
-<h4 id="org94481a5"><span class="section-number-4">3.7.3</span> 優化模型</h4>
-<div class="outline-text-4" id="text-3-7-3">
+<div id="outline-container-org024f2ea" class="outline-4">
+<h4 id="org024f2ea"><span class="section-number-4">7.7.3.</span> 優化模型</h4>
+<div class="outline-text-4" id="text-7-7-3">
 <p>
 優化mobilenet-v1-1.0-224 並產出中間表示(*.xml, *.bin)文件，FP16/FP32 格式於 /opt/intel/openvino/deployment_tools/public/模型名稱路徑下<br />
 </p>
@@ -809,18 +1092,18 @@ CONTAINER ID   IMAGE                   COMMAND       CREATED       STATUS       
 </div>
 </div>
 </div>
-<div id="outline-container-org30e25ad" class="outline-4">
-<h4 id="org30e25ad"><span class="section-number-4">3.7.4</span> 輸入圖片，測試推理</h4>
-<div class="outline-text-4" id="text-3-7-4">
+<div id="outline-container-org9606c91" class="outline-4">
+<h4 id="org9606c91"><span class="section-number-4">7.7.4.</span> 輸入圖片，測試推理</h4>
+<div class="outline-text-4" id="text-7-7-4">
 <div class="org-src-container">
 <pre class="src src-shell"><span class="linenr">1: </span>python3 /opt/intel/openvino/inference_engine/samples/python/classification_sample_async/classification_sample_async.py -m /opt/intel/openvino/public/mobilenet-v1-1.0-224/FP16/mobilenet-v1-1.0-224.xml -i /opt/intel/openvino/deployment_tools/demo/car.png --labels /opt/intel/openvino/deployment_tools/demo/squeezenet1.1.labels
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org940d0cc" class="outline-4">
-<h4 id="org940d0cc"><span class="section-number-4">3.7.5</span> 換成其他汽車圖片</h4>
-<div class="outline-text-4" id="text-3-7-5">
+<div id="outline-container-org80ea544" class="outline-4">
+<h4 id="org80ea544"><span class="section-number-4">7.7.5.</span> 換成其他汽車圖片</h4>
+<div class="outline-text-4" id="text-7-7-5">
 <ol class="org-ol">
 <li>切換到host下載圖片, ~/Downloads/pickup.jpg<br /></li>
 <li><p>
@@ -839,7 +1122,7 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 將下載的圖片複製到container中<br />
 </p>
 <div class="org-src-container">
-<pre class="src src-shell"><span class="linenr">1: </span>   docker <span style="color: #ECBE7B;">cp</span> ~/Downloads/pickup.jpg 29c22b186088:/opt/intel/openvino/deployment_tools/demo
+<pre class="src src-shell"><span class="linenr">1: </span>   docker cp ~/Downloads/pickup.jpg 29c22b186088:/opt/intel/openvino/deployment_tools/demo
 </pre>
 </div></li>
 <li>重新測試推理<br /></li>
@@ -847,9 +1130,9 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 </div>
 </div>
 </div>
-<div id="outline-container-orgb14af87" class="outline-3">
-<h3 id="orgb14af87"><span class="section-number-3">3.8</span> Docker References</h3>
-<div class="outline-text-3" id="text-3-8">
+<div id="outline-container-org2960414" class="outline-3">
+<h3 id="org2960414"><span class="section-number-3">7.8.</span> Docker References</h3>
+<div class="outline-text-3" id="text-7-8">
 <p>
 <a href="https://makerpro.cc/2021/01/use-docker-to-develop-the-environment-of-openvino/">- 如何利用Docker快速建置OpenVINO™ Toolkit開發環境</a><br />
 </p>
@@ -860,9 +1143,9 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 </div>
 </div>
 
-<div id="outline-container-org6f5ca04" class="outline-2">
-<h2 id="org6f5ca04"><span class="section-number-2">4</span> Uninstallation OpenVino on Mac</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org83c6437" class="outline-2">
+<h2 id="org83c6437"><span class="section-number-2">8.</span> Uninstallation OpenVino on Mac</h2>
+<div class="outline-text-2" id="text-8">
 <ul class="org-ul">
 <li><p>
 執行openvino_toolkit_uninstaller.app:<br />
@@ -874,10 +1157,32 @@ CONTAINER ID   IMAGE                    COMMAND                  CREATED        
 </ul>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://ithelp.ithome.com.tw/articles/10209319">27. 工欲利其器：突破深度學習的巴別塔障礙</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://blog.tibame.com/?p=19049">AI60問】Q40AI深度學習開發工具有哪些？</a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://vocus.cc/article/5b83fadffd89780001393246">[探索] 現行深度學習架構概況 </a><br />
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4" role="doc-backlink">4</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
+<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%96%93%E8%AA%9E%E8%A8%80">中間語言</a><br />
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
-<p class="author">Author: Yung Chin, Yen</p>
-<p class="date">Created: 2021-11-24 Wed 11:03</p>
+<p class="author">Author: Yung-Chin Yen</p>
+<p class="date">Created: 2022-07-01 Fri 12:43</p>
 </div>
 </body>
 </html>

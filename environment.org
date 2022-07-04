@@ -3,6 +3,11 @@
 #+OPTIONS: toc:2 ^:nil num:5
 #+PROPERTY: header-args :eval never-export
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/white.css" />
+#+include: ../pdf.org
+
+* 403教室
+- 無線AP: TNFSH403
+- 密碼: 403403403
 
 * Mac OS教學
 - [[https://support.apple.com/zh-tw/HT201236][Mac 鍵盤快速鍵]]
@@ -14,6 +19,7 @@
 - 縮小: 貼上: Command ⌘ - -
 - 關閉程式: Command ⌘ - Q
 - 關閉視窗: Command ⌘ - W
+
 * Python開發環境
 寫Python的工具大概有數十種，以下是其中兩種可以在教室中直接使用的環境： Jupyter Notebook、PyCharm。
 ** Jupyter Notebook
@@ -122,4 +128,5 @@ conda deactivate
 - [[https://letranger.github.io/PythonCourse/PythonBasic.html][PythonBasic]]
 - [[https://letranger.github.io/PythonCourse/PythonAdvanced.html][PythonAdvanced]]
 ** AI
--
+- [[file:~/Dropbox/AI/AI-Introduction.org][AI簡介]]
+- [[file:~/Dropbox/AI-course/SL.org][監督式學習]]
