@@ -128,11 +128,5 @@ conda deactivate
 #+end_src
 
 * 學習資源
-** Python
 - [[https://letranger.github.io/PythonCourse/PythonBasic.html][PythonBasic]]
 - [[https://letranger.github.io/PythonCourse/PythonAdvanced.html][PythonAdvanced]]
-** AI
-- [[https://letranger.github.io/AI-course/AI-Intro.html][AI簡介]]
-- [[https://letranger.github.io/AI-course/SL.html][監督式學習]]
-- [[https://letranger.github.io/AI-course/UL.html][非監督式學習]]
-- [[https://letranger.github.io/AI-course/DL.html][深度學習]]
