@@ -1,0 +1,8 @@
+#+title: 111年南區人工智慧教育高中生營隊問卷調查結果
+
+* 性別
+#+begin_src python -r -n :async :results output :exports both
+import pandas as pd
+
+data =
+#+end_src
