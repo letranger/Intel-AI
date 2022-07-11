@@ -623,7 +623,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 * 問卷回應
 ** 基本訊息
 *** 學員性別
-#+CAPTION: Caption
+#+CAPTION: 學員性別分佈
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -631,7 +631,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig1.png]]
 *** 是否曾參加類似的資訊科相關營隊
-#+CAPTION: Caption
+#+CAPTION: 學員是否曾參加類似營隊
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -639,7 +639,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig2.png]]
 *** 參加本次營隊的訊息來源
-#+CAPTION: Caption
+#+CAPTION: 學員得知此次營隊之訊息來源
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -647,7 +647,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig3.png]]
 *** 參加本次研習的動機
-#+CAPTION: Caption
+#+CAPTION: 學員參加此次營隊動機
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -656,15 +656,16 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 [[file:images/fig4.png]]
 ** 營隊課程內容
 *** 關於課程內容設計，在各主題內容難度方面您認為
-#+CAPTION: Caption
+#+CAPTION: 營隊課程難易程度(1:簡單/5:困難)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
 #+ATTR_ORG: :width 400
 #+ATTR_HTML: :width 800
 [[file:images/fig5.png]]
+
 *** 關於課程內容設計，在各主題安排順序方面您認為是否足夠適當
-#+CAPTION: Caption
+#+CAPTION: 營隊課程主題安排順序適當程度(1:不適當/5:適當)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -672,7 +673,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig6.png]]
 *** 關於講師對於各主題的講解說明，你認為是否足夠清楚
-#+CAPTION: Caption
+#+CAPTION: 營隊課程主題講解清楚程度(1:不夠清楚/5:非常清楚)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -680,7 +681,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig7.png]]
 *** 關於課程內容設計，在活動時間長度方面您認為是否足夠適當
-#+CAPTION: Caption
+#+CAPTION: 營隊課程長度適當程度(1:不適當/5:適當)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -711,7 +712,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 1. 模型原理的深入介紹
 ** 營隊場地及食宿安排
 *** 對於營隊提供的教學硬體設施，您覺得
-#+CAPTION: Caption
+#+CAPTION: 營隊教學硬體設施之滿意程度(1:非常不滿意/5:非常滿意)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -719,7 +720,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig10.png]]
 *** 對於營隊提供的飲食，您覺得
-#+CAPTION: Caption
+#+CAPTION: 營隊提供飲食之滿意程度(1:非常不滿意/5:非常滿意)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -727,7 +728,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig11.png]]
 *** 對於營隊提供的住宿，您覺得
-#+CAPTION: Caption
+#+CAPTION: 營隊提供住宿之滿意程度(1:非常不滿意/5:非常滿意)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -736,7 +737,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 [[file:images/fig12.png]]
 ** 心得建議
 *** 此次營隊你認為最大的收獲來自(可複選)
-#+CAPTION: Caption
+#+CAPTION: 此次營隊學生最大的收獲來源
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -744,7 +745,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig13.png]]
 *** 日後如果還有類似的營隊，你是否願意再次參加
-#+CAPTION: Caption
+#+CAPTION: 日後是否願意再參加類似營隊
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -776,7 +777,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 * 性別差異
 ** 基本訊息
 *** 是否曾參加類似的資訊科相關營隊
-#+CAPTION: Caption
+#+CAPTION: 學員是否曾參加類似營隊
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -784,7 +785,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a2.png]]
 *** 參加本次營隊的訊息來源
-#+CAPTION: Caption
+#+CAPTION: 學員得知此次營隊之訊息來源
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -792,7 +793,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a3.png]]
 *** 參加本次研習的動機
-#+CAPTION: Caption
+#+CAPTION: 學員參加此次營隊動機
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -801,7 +802,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 [[file:images/fig-a4.png]]
 ** 營隊課程內容
 *** 關於課程內容設計，在各主題內容難度方面您認為
-#+CAPTION: Caption
+#+CAPTION: 營隊課程難易程度(1:簡單/5:困難)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -809,7 +810,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a5.png]]
 *** 關於課程內容設計，在各主題安排順序方面您認為是否足夠適當
-#+CAPTION: Caption
+#+CAPTION: 營隊課程主題安排順序適當程度(1:不適當/5:適當)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -817,7 +818,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a6.png]]
 *** 關於講師對於各主題的講解說明，你認為是否足夠清楚
-#+CAPTION: Caption
+#+CAPTION: 營隊課程主題講解清楚程度(1:不夠清楚/5:非常清楚)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -825,7 +826,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a7.png]]
 *** 關於課程內容設計，在活動時間長度方面您認為是否足夠適當
-#+CAPTION: Caption
+#+CAPTION: 營隊課程長度適當程度(1:不適當/5:適當)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -858,7 +859,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 17. 讚
 ** 營隊場地及食宿安排
 *** 對於營隊提供的教學硬體設施，您覺得
-#+CAPTION: Caption
+#+CAPTION: 營隊教學硬體設施之滿意程度(1:非常不滿意/5:非常滿意)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -866,7 +867,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a10.png]]
 *** 對於營隊提供的飲食，您覺得
-#+CAPTION: Caption
+#+CAPTION: 營隊提供飲食之滿意程度(1:非常不滿意/5:非常滿意)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -874,7 +875,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a11.png]]
 *** 對於營隊提供的住宿，您覺得
-#+CAPTION: Caption
+#+CAPTION: 營隊提供住宿之滿意程度(1:非常不滿意/5:非常滿意)
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -883,7 +884,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 [[file:images/fig-a12.png]]
 ** 心得建議
 *** 此次營隊你認為最大的收獲來自(可複選)
-#+CAPTION: Caption
+#+CAPTION: 此次營隊學生最大的收獲來源
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
@@ -891,7 +892,7 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 #+ATTR_HTML: :width 800
 [[file:images/fig-a13.png]]
 *** 日後如果還有類似的營隊，你是否願意再次參加
-#+CAPTION: Caption
+#+CAPTION: 日後是否願意再參加類似營隊
 #+LABEL:fig:Labl
 #+name: fig:Name
 #+ATTR_LATEX: :width 400
