@@ -327,6 +327,7 @@ fig = data.groupby(['性別'])[data.columns[no]].value_counts().T.unstack().T.so
 for container in fig.containers:
     fig.bar_label(container)
 plt.grid()
+
 plt.savefig(f'images/fig-a{no}.png', dpi=300)
 
 # 3. =====訊息來源=====
@@ -507,6 +508,7 @@ dagp = cbs(data[[data.columns[1], data.columns[no]]])
 fig = dagp.groupby(['性別'])[dagp.columns[1]].value_counts().unstack().T.sort_index(axis=1, ascending=False).plot(kind='barh', rot=0,  width=1)
 for container in fig.containers:
     fig.bar_label(container)
+plt.legend(bbox_to_anchor=(1,0.8))
 plt.grid()
 plt.ylabel(dagp.columns[1])
 plt.xlabel('人數')
