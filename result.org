@@ -834,157 +834,6 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 [[file:images/fig-a8.png]]
 *** 哪些內容是您認為需要卻沒有涵蓋在這次的課程，請描述。
 **** 女
-1. 有些原理沒有講得很清楚，容易混淆，另外希望如果有開這種課，可以選擇不要如此集中上課，到了晚上...
-1. 物件偵測
-1. 無
-1. 無
-**** 男
-1. nope
-1. no
-1. 無
-1. 沒有想法
-1. 難得住這麼好的飯店，需要更多的時間享受飯店設施
-1. 暫時沒想到
-1. Python 的由來
-1. 想不到
-1. 無
-1. 更多自己實作coding的課程
-1. 無
-1. 物件偵測
-1. 不知道
-1. 示範適用更多種的AI模型
-1. Gradient descent, cost function
-1. 正確的篩選參加者的程度，足夠力度的宣傳，更為多元廣泛且深入的課程，模型原理的深入介紹
-** 營隊場地及食宿安排
-*** 對於營隊提供的教學硬體設施，您覺得
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a10.png]]
-*** 對於營隊提供的飲食，您覺得
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a11.png]]
-*** 對於營隊提供的住宿，您覺得
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a12.png]]
-** 心得建議
-*** 此次營隊你認為最大的收獲來自(可複選)
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a13.png]]
-*** 日後如果還有類似的營隊，你是否願意再次參加
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a14.png]]
-*** 關於此次的營隊，還有什麼其他的建議或心得，請你寫下來，提供我們改進的方向，讓下一次的營隊辦的更為成功，造福學弟妹或是您自己。
-**** 女
-1. 我..在前面好像都打完了…..希望下次不要時間排得如此緊湊，休息時間要夠，可以多天，內容可以再豐富一點，希望今年寒假還有這樣的活動可以參加！！謝謝各位教授、老師、助教、隊輔的指導、關心與照顧~
-1. 時間安排有點過於緊湊，整天上下來蠻累的，可以把中堂休息增加，便當太多了QAQ
-1. 參加這一次的營隊收穫很多！感謝教授、助教、同學們的幫忙，我才能夠把報告做好。
-1. 我覺得我們對課程的基本知識都不太夠，所以有時候會很吃力
-
-**** 男
-1. 課程的安排可能要人性化一點點，對於一個完全沒接觸過AI課程的人來說，前三天高強度的知識轟炸真的不太性
-1. no
-1. 簡報顏色可以更好看
-1.
-1. 參加這一次的營隊收穫很多！感謝教授、助教、同學們的幫忙，我才能夠把報告做好。
-1. 課程有點緊湊，前兩天真正實作的機會很少，實作也都只是在抄code，感覺起來沒有真的加深我們對AI程式的熟練度
-1. 暫時沒有
-1. 要考慮到只有C++基礎的人，提前告知要學一些python 語法，才不會聽的一愣一愣的，不過總體來說很棒
-1. 時間安排可以更好
-1. 無
-1. 我覺得我們對課程的基本知識都不太夠，所以有時候會很吃力
-1. 很棒
-1. 講得有點快
-1. ok
-1. 課程時間要更長一點
-1. 延長營隊天數，使課程及實作時間較充裕
-1. 更深入講解基礎原理
-1. 分隊的方式調整 可以的話提供類似團報的方式使認識的人能夠成為小組
-
-* 性別差異
-** 基本訊息
-*** 是否曾參加類似的資訊科相關營隊
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a2.png]]
-*** 參加本次營隊的訊息來源
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a3.png]]
-*** 參加本次研習的動機
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a4.png]]
-** 營隊課程內容
-*** 關於課程內容設計，在各主題內容難度方面您認為
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a5.png]]
-*** 關於課程內容設計，在各主題安排順序方面您認為是否足夠適當
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a6.png]]
-*** 關於講師對於各主題的講解說明，你認為是否足夠清楚
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a7.png]]
-*** 關於課程內容設計，在活動時間長度方面您認為是否足夠適當
-#+CAPTION: Caption
-#+LABEL:fig:Labl
-#+name: fig:Name
-#+ATTR_LATEX: :width 400
-#+ATTR_ORG: :width 400
-#+ATTR_HTML: :width 800
-[[file:images/fig-a8.png]]
-*** 哪些內容是您認為需要卻沒有涵蓋在這次的課程，請描述。
-**** 女
 1. 有些原理沒有講得很清楚，容易混淆，另外希望如果有開這種課，可以選擇不要如此集中上課，到了晚上精神很容易渙散，甚至過於集中隔天可能也沒有一顆清醒的腦袋上課。此外，希望下次還能有諸如此類的活動舉行，儘管很累，但很開心。希望可以多多帶實作，不然觀念講一講沒有帶其實還是不太會操作，以上。謝謝各位教授、老師、助教以及隊輔的指導、照顧與關心^^
 1. 物件偵測
 1. 無
@@ -1057,6 +906,10 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 1. 我覺得我們對課程的基本知識都不太夠，所以有時候會很吃力
 
 **** 男
+
+1. 課程的安排可能要人性化一點點，對於一個完全沒接觸過AI課程的人來說，前三天高強度的知識轟炸真的不太性
+1. no
+1. 簡報顏色可以更好看
 1. 課程深度對於沒有python基礎的人類會有困難（本人便有點這種感覺）但大多課程都還可以，只不過記憶力要稍強，否則到了隔天很容易忘記。
 1. 課程有點緊湊，前兩天真正實作的機會很少，實作也都只是在抄code，感覺起來沒有真的加深我們對AI程式的熟練度
 1. 暫時沒有
@@ -1070,3 +923,4 @@ Name: 關於此次的營隊，還有什麼其他的建議或心得，請你寫�
 1. 延長營隊天數，使課程及實作時間較充裕
 1. 更深入講解基礎原理
 1. 分隊的方式調整 可以的話提供類似團報的方式使認識的人能夠成為小組
+1. 讚👍
